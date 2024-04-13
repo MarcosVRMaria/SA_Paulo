@@ -28,7 +28,7 @@ const Login = () => {
             .then((response) => {
                 console.log(response.data);
                 if (response.data == true) {
-                    navigate("/cadastro");
+                    navigate("/home");
                 } else {
                     alert("Usuario ou senha incorreto")
                 }
