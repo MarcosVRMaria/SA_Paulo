@@ -1,10 +1,11 @@
 import express from "express"
 import 'dotenv/config'
-import { router } from "./routes/API.js"
+import { router } from "./routes/api.js"
 import sequelize from "./database.js"
+import cors from "cors"
 const app = express()
 const conexao = process.env.CONEXAO
-
+app.use(cors())
 try {
     await sequelize.sync()
 } catch (erro) {

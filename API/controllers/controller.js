@@ -29,7 +29,17 @@ const getEmprestimos = async (req, res) => {
         res.status(200).send({ tabela })
     } catch (erro) {
         console.log(erro)
-        res.status(404).send({ mensagem: 'Erro ao listar Emprestimos' })
+        res.status(404).send({ mensagem: 'Erro ao listar EPI' })
+    }
+}
+const getUsuarios = async (req, res) => {
+    const { user } = req.params
+    try {
+        const tabela = await tabelas.Cadastro.findAll({ where: { nome: user } })
+        res.status(200).send({ tabela })
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao listar Usuários' })
     }
 }
 
@@ -48,6 +58,22 @@ const postEpi = async (req, res) => {
     } catch (erro) {
         console.log(erro)
         res.status(404).send({ mensagem: 'Erro ao cadastrar EPI' })
+    }
+
+}
+
+const postUsuario = async (req, res) => {
+
+
+    try {
+        const { nome, senha } = req.body
+        console.log(req.body)
+        if (!nome || !senha) return res.status(404).send({ mensagem: 'Campos incompletos' })
+        const usuarioCriado = await tabelas.Cadastro.create({ nome, senha })
+        res.status(201).send({ usuarioCriado })
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao cadastrar Usuario' })
     }
 
 }
@@ -181,4 +207,4 @@ const putAtualizarEmprestimos = async (req, res) => {
 
 
 
-export default { getEpi, getEmprestimos, getFuncionarios, postEmprestimo, postEpi, postFuncionario, deleteApagarEmprestimos, deleteApagarEpi, deleteApagarFuncionarios, putAtualizarEmprestimos, putAtualizarEpi, putAtualizarFuncionario }
+export default { getUsuarios, postUsuario, getEpi, getEmprestimos, getFuncionarios, postEmprestimo, postEpi, postFuncionario, deleteApagarEmprestimos, deleteApagarEpi, deleteApagarFuncionarios, putAtualizarEmprestimos, putAtualizarEpi, putAtualizarFuncionario }
