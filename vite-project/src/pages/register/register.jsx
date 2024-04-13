@@ -5,6 +5,7 @@ import axios from "axios";
 const Register = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password2, setPassword2] = useState("");
 
   const handleClick = async () => {
@@ -15,7 +16,8 @@ const Register = () => {
     }
     let data = JSON.stringify({
       nome: user,
-      senha: password
+      senha: password,
+      email: email
     });
 
     let config = {
@@ -57,7 +59,7 @@ const Register = () => {
 
     let config2 = {
       method: 'get',
-      url: `http://localhost:3000/getUsuarios/${user}`,
+      url: `http://localhost:3000/getUsuarioNome/${user}`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -80,15 +82,18 @@ const Register = () => {
   }
   return (
     <div>
-      <RegisterForm 
-      info={{setPassword2:setPassword2,
-        password2:password2,
-        password:password,
-        setPassword:setPassword,
-        setUser:setUser,
-        user:user
-      }}
-      click={handleClick}/>
+      <RegisterForm
+        info={{
+          setPassword2: setPassword2,
+          password2: password2,
+          password: password,
+          email: email,
+          setEmail: setEmail,
+          setPassword: setPassword,
+          setUser: setUser,
+          user: user
+        }}
+        click={handleClick} />
     </div>
   );
 };
