@@ -98,6 +98,7 @@ const postEmprestimo = async (req, res) => {
         const { nomeFuncionario, matricula, epi, dataRetirada, dataDevolucao } = req.body
         if (!nomeFuncionario || !matricula || !epi || !dataRetirada || !dataDevolucao) return res.status(404).send({ mensagem: 'Campos incompletos' })
         const emprestimoCriado = await tabelas.Emprestimos.create({ nomeFuncionario, matricula, epi, dataRetirada, dataDevolucao })
+        res.status(201).send({ emprestimoCriado })
     } catch (erro) {
         console.log(erro)
         res.status(404).send({ mensagem: 'Erro ao cadastrar Emprestimo' })

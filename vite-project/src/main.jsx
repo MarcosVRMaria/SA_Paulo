@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Register from './pages/register/register.jsx';
+import Home from './pages/home/home.jsx';
 
 
 const paginas = createBrowserRouter([
@@ -14,6 +15,10 @@ const paginas = createBrowserRouter([
   {
     path: "/cadastro",
     element: <Register />
+  },
+  {
+    path:"/home",
+    element: <Home/>
   }
 ])
 
