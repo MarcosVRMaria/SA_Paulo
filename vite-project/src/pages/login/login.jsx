@@ -1,12 +1,13 @@
 import { useState } from "react";
 import LoginForm from "../../component/login";
 import axios from "axios";
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
     const [password, setPassword] = useState("");
     const [user, setUser] = useState("");
 
+    const navigate = useNavigate();
 
     const handleClick = async () => {
 
@@ -27,7 +28,9 @@ const Login = () => {
             .then((response) => {
                 console.log(response.data);
                 if (response.data == true) {
-                    <Link to="/home"></Link>
+                    navigate("/cadastro");
+                } else {
+                    alert("Usuario ou senha incorreto")
                 }
             })
             .catch((error) => {
@@ -46,6 +49,7 @@ const Login = () => {
                     user: user
                 }}
                 click={handleClick} />
+
         </div>
     );
 }
