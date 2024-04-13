@@ -1,4 +1,3 @@
-import { useState } from "react";
 import RegisterForm from "../../component/register";
 const Register = () => {
   return (

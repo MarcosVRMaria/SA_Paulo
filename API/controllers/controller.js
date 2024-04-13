@@ -66,10 +66,10 @@ const postUsuario = async (req, res) => {
 
 
     try {
-        const { nome, senha } = req.body
+        const { nome, senha, email } = req.body
         console.log(req.body)
-        if (!nome || !senha) return res.status(404).send({ mensagem: 'Campos incompletos' })
-        const usuarioCriado = await tabelas.Cadastro.create({ nome, senha })
+        if (!nome || !senha || !email) return res.status(404).send({ mensagem: 'Campos incompletos' })
+        const usuarioCriado = await tabelas.Cadastro.create({ nome, senha, email })
         res.status(201).send({ usuarioCriado })
     } catch (erro) {
         console.log(erro)

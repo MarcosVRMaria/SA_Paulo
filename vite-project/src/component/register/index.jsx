@@ -5,7 +5,8 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [password2, setPassword2] = useState("");
-  const [responseUser,SetResponseUser ] = useState("")
+  const [email, setEmail] = useState("")
+  const [responseUser, SetResponseUser] = useState("")
 
   const handleClick = async () => {
 
@@ -15,7 +16,8 @@ const RegisterForm = () => {
     }
     let data = JSON.stringify({
       nome: user,
-      senha: password
+      senha: password,
+      email: email
     });
 
     let config = {
@@ -26,7 +28,7 @@ const RegisterForm = () => {
       },
       data: data
     };
-  
+
     let verifyUser = await verifyUserDuplicate()
 
     console.log(verifyUser)
@@ -53,7 +55,7 @@ const RegisterForm = () => {
     }
   }
 
-  const  verifyUserDuplicate = async () => {
+  const verifyUserDuplicate = async () => {
 
     let config2 = {
       method: 'get',
@@ -67,7 +69,7 @@ const RegisterForm = () => {
     let verify = axios.request(config2)
       .then((response) => {
         console.log(response.data)
-        if (response.data.tabela.length>0) {
+        if (response.data.tabela.length > 0) {
           alert('Usuario já cadastrado')
           return true
         }
@@ -75,12 +77,21 @@ const RegisterForm = () => {
       .catch((error) => {
         console.log(error);
       });
-return verify
+    return verify
 
   }
 
   return (
     <div>
+      <input
+        type="text"
+        id="email"
+        required
+        minLength="3"
+        placeholder="E-mail"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+      />
       <input
         type="text"
         id="user"

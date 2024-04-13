@@ -7,6 +7,9 @@ const Cadastro = sequelize.define('Usuarios', {
         primaryKey: true,
         autoIncrement: true,
     },
+    email: {
+        type: DataTypes.STRING
+    },
     nome: {
         type: DataTypes.STRING
     },
