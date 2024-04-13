@@ -32,10 +32,21 @@ const getEmprestimos = async (req, res) => {
         res.status(404).send({ mensagem: 'Erro ao listar EPI' })
     }
 }
-const getUsuarios = async (req, res) => {
+const getUsuarioNome = async (req, res) => {
     const { user } = req.params
     try {
         const tabela = await tabelas.Cadastro.findAll({ where: { nome: user } })
+        res.status(200).send({ tabela })
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro ao listar Usuários por nome' })
+    }
+}
+const getUsuarios = async (req, res) => {
+    const { user, password } = req.params
+    try {
+        const tabela = await tabelas.Cadastro.findAll({ where: { nome: user, senha: password } })
+        console.log(tabela)
         res.status(200).send({ tabela })
     } catch (erro) {
         console.log(erro)
@@ -48,28 +59,43 @@ const getUsuarios = async (req, res) => {
 
 //POST'S
 
+const postVerify = async (req, res) => {
+    const { user, password } = req.body
+    try {
+        const tabela = await tabelas.Cadastro.findAll({ where: { nome: user, senha: password } })
+        console.log(tabela)
+        if (tabela.length == 0) {
+            res.status(201).send({ mensagem: "Usuario ou senha incorreta" })
+            alert('Usuario ou senha incorreta')
+        } else {
+            res.status(201).send(true)
+        }
+    } catch (erro) {
+        console.log(erro)
+        res.status(404).send({ mensagem: 'Erro' })
+    }
+}
 
 const postEpi = async (req, res) => {
     try {
         const { tipo, marca, nome, ca, validade } = req.body
         if (!tipo || !marca || !nome || !ca || !validade) return res.status(404).send({ mensagem: 'Campos incompletos' })
         const epiCriada = await tabelas.Epi.create({ tipo, marca, nome, ca, validade })
-        res.status(201).send({ cervejaCriado })
+        res.status(201).send({ epiCriada })
     } catch (erro) {
         console.log(erro)
         res.status(404).send({ mensagem: 'Erro ao cadastrar EPI' })
     }
-
 }
 
 const postUsuario = async (req, res) => {
 
 
     try {
-        const { nome, senha } = req.body
+        const { nome, senha, email } = req.body
         console.log(req.body)
-        if (!nome || !senha) return res.status(404).send({ mensagem: 'Campos incompletos' })
-        const usuarioCriado = await tabelas.Cadastro.create({ nome, senha })
+        if (!nome || !senha || !email) return res.status(404).send({ mensagem: 'Campos incompletos' })
+        const usuarioCriado = await tabelas.Cadastro.create({ nome, senha, email })
         res.status(201).send({ usuarioCriado })
     } catch (erro) {
         console.log(erro)
@@ -207,4 +233,4 @@ const putAtualizarEmprestimos = async (req, res) => {
 
 
 
-export default { getUsuarios, postUsuario, getEpi, getEmprestimos, getFuncionarios, postEmprestimo, postEpi, postFuncionario, deleteApagarEmprestimos, deleteApagarEpi, deleteApagarFuncionarios, putAtualizarEmprestimos, putAtualizarEpi, putAtualizarFuncionario }
+export default { postVerify, getUsuarioNome, getUsuarios, postUsuario, getEpi, getEmprestimos, getFuncionarios, postEmprestimo, postEpi, postFuncionario, deleteApagarEmprestimos, deleteApagarEpi, deleteApagarFuncionarios, putAtualizarEmprestimos, putAtualizarEpi, putAtualizarFuncionario }

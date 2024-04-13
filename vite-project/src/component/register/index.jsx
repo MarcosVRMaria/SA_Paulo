@@ -1,9 +1,18 @@
 
-const RegisterForm = ({info, click}) => {
-  
+const RegisterForm = ({ info, click }) => {
+
 
   return (
     <div>
+      <input
+        type="text"
+        id="email"
+        required
+        minLength="3"
+        placeholder="E-mail"
+        onChange={(e) => info.setUser(e.target.value)}
+        value={info.email}
+      />
       <input
         type="text"
         id="user"
