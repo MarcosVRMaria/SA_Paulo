@@ -66,7 +66,7 @@ const postVerify = async (req, res) => {
         console.log(tabela)
         if (tabela.length == 0) {
             res.status(201).send({ mensagem: "Usuario ou senha incorreta" })
-            alert('Usuario ou senha incorreta')
+            // alert('Usuario ou senha incorreta')
         } else {
             res.status(201).send(true)
         }
