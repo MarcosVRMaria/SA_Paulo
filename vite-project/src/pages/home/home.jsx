@@ -6,7 +6,7 @@ import './home.css'
 import Card from "../../component/card";
 const Home = () => {
     const [data, setData] = useState([])
-
+    const [text,setText] =useState("AAAAAAAAAAAAA")
     
     const columns = [
         {
@@ -74,7 +74,7 @@ const Home = () => {
             top: "25%",
             left: "10%",
         }} >
-            <Table columns={columns} data={data} />
+            <Table columns={columns} data={data} select={true} />
         </div>
         <div style={{
             position: "fixed",
@@ -86,6 +86,7 @@ const Home = () => {
         <Card name={"Gerenciar funcionário"} route={"gerenciarFuncionario"} />
         <Card name={"Gerenciar empréstimo"} route={"gerenciarEmprestimo"} />
         <Card name={"Histórico"} route={"historico"} />
+     
     </div>
         </div >
     );

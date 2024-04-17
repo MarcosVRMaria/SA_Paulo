@@ -10,7 +10,7 @@ const RegisterForm = ({ info, click }) => {
         required
         minLength="3"
         placeholder="E-mail"
-        onChange={(e) => info.setUser(e.target.value)}
+        onChange={(e) => info.setEmail(e.target.value)}
         value={info.email}
       />
       <input
