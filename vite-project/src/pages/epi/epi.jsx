@@ -3,6 +3,7 @@ import Table from "../../component/table";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault";
+import moment from "moment";
 
 
 const Epi = () => {
@@ -72,18 +73,22 @@ const Epi = () => {
             .then((response) => {
                 let responseData = response.data.tabela;
                 console.log(responseData)
-                let teste = responseData.filter((x) => x.nome == nome || x.ca == ca)
-                const objectsData = teste.map((element) => {
-                    return {
+
+                let filtro = responseData.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipo || x.marca == marca || x.validade == datav)
+
+                const objectsData = filtro.map((element) => {
+                    let date = element.validade;
+                    date = moment(date);
+                    date = date.utc().format("DD/MM/YYYY");
+                    return ({
                         tipo: element.tipo,
                         marca: element.marca,
                         nome: element.nome,
                         ca: element.ca,
-                        validade: element.validade
-                    };
+                        validade: date
+                    });
                 });
                 setData(objectsData)
-                console.log(objectsData)
             })
             .catch((error) => {
                 console.log(error);
