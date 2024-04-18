@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Register from './pages/register/register.jsx';
 import Login from './pages/login/login.jsx';
 import Home from './pages/home/home.jsx';
+import Epi from './pages/epi/epi.jsx';
 
 
 const paginas = createBrowserRouter([
@@ -20,9 +21,12 @@ const paginas = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
-  },{
-    path:"/home",
-    element: <Home/>
+  }, {
+    path: "/home",
+    element: <Home />
+  }, {
+    path: "/epi",
+    element: <Epi />
   }
 ])
 
