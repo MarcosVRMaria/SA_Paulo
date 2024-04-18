@@ -14,11 +14,12 @@ const options = [
  * @param {useState} setSelectedOption - um argumento do tipo useState Set
  * @param {Array} options - um argumento contendo todas as opões do dropdown
  */
- const Dropdown = ({selectedOption, setSelectedOption,options}) => {
+ const Dropdown = ({selectedOption, setSelectedOption,options,placeholder}) => {
 
   return (
     <div className="dropdown">
       <Select
+        placeholder={placeholder}
         defaultValue={selectedOption}
         onChange={setSelectedOption}
         options={options}
