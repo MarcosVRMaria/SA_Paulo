@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Register from './pages/register/register.jsx';
 import Login from './pages/login/login.jsx';
 import Home from './pages/home/home.jsx';
+import EmployeeManagement from './pages/employeeManagement/employeeManagement.jsx';
 
 
 const paginas = createBrowserRouter([
@@ -23,6 +24,10 @@ const paginas = createBrowserRouter([
   },{
     path:"/home",
     element: <Home/>
+  },
+  {
+    path:"/funcionarios",
+    element: <EmployeeManagement/>
   }
 ])
 

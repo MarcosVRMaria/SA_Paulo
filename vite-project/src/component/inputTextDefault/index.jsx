@@ -1,16 +1,16 @@
-const IndexTextDefault = (info) => {
+const InputTextDefault = ({ info }) => {
 
     return (
         <input
-            type={info.text}
+            type="text"
             id={info.id}
             required
             minLength="3"
             placeholder={info.placeholder}
-            onChange={(e) => { info.func }}
+            onChange={(e) => info.func(e.target.value)}
             value={info.value}
         />
     )
 }
 
-export default IndexTextDefault
+export default InputTextDefault
