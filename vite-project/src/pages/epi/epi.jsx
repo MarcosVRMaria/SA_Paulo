@@ -12,7 +12,7 @@ const Epi = () => {
     const [nome, setNome] = useState("")
     const [ca, setCa] = useState("")
     const [datav, setDatav] = useState("")
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]) 
 
     const navigate = useNavigate()
 
@@ -73,9 +73,10 @@ const Epi = () => {
             .then((response) => {
                 let responseData = response.data.tabela;
                 console.log(responseData)
-
-                let filtro = responseData.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipo || x.marca == marca || x.validade == datav)
-
+                let x = datav.split("/")
+                let date = x[2] + "-" + x[1] + "-" + x[0]
+                let date2 = date + "T00:00:00.000Z"
+                let filtro = responseData.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipo || x.marca == marca || x.validade == date2)
                 const objectsData = filtro.map((element) => {
                     let date = element.validade;
                     date = moment(date);
