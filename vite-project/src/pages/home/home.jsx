@@ -8,6 +8,8 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [text, setText] = useState("AAAAAAAAAAAAA");
 
+
+
   const columns = [
     {
       name: "Funcionário",
@@ -48,7 +50,7 @@ const Home = () => {
         const objectsData = responseData.map((element) => {
           let date = element.dataDevolucao;
           date = moment(date);
-          date = date.format("DD/MM/YYYY");
+          date = date.utc().format("DD/MM/YYYY");
           return {
             funcionaio: element.nomeFuncionario,
             epi: element.epi,
@@ -83,10 +85,10 @@ const Home = () => {
           gridTemplateColumns: "repeat(2, 1fr)",
         }}
       >
-        <Card name={"Gerenciar EPI"} route={"gerenciarEpi"} />
-        <Card name={"Gerenciar funcionário"} route={"gerenciarFuncionario"} />
-        <Card name={"Gerenciar empréstimo"} route={"gerenciarEmprestimo"} />
-        <Card name={"Histórico"} route={"historico"} />
+        <Card name={"Gerenciar EPI"} route={"/epi"} />
+        <Card name={"Gerenciar funcionário"} route={"/funcionarios"} />
+        <Card name={"Gerenciar empréstimo"} route={"/emprestimos"} />
+        <Card name={"Histórico"} route={"/historico"} />
       </div>
     </div>
   );
