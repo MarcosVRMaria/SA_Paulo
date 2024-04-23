@@ -3,6 +3,7 @@ import Table from "../../component/table";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault";
+import ModalCadastro from "../../component/modal/index.jsx"
 import moment from "moment";
 
 
@@ -12,7 +13,13 @@ const Epi = () => {
     const [nome, setNome] = useState("")
     const [ca, setCa] = useState("")
     const [datav, setDatav] = useState("")
-    const [data, setData] = useState([]) 
+    const [data, setData] = useState([])
+    const [tipoModal, setTipoModal] = useState("")
+    const [marcaModal, setMarcaModal] = useState("")
+    const [nomeModal, setNomeModal] = useState("")
+    const [caModal, setCaModal] = useState("")
+    const [datavModal, setDatavModal] = useState("")
+
 
     const navigate = useNavigate()
 
@@ -139,6 +146,38 @@ const Epi = () => {
                     placeholder: "Data de validade",
                     func: setDatav,
                     value: datav
+                }}
+            />
+            <ModalCadastro
+                info={{
+                    metodo: "Cadastrar",
+                    titulo: "Cadastro",
+
+                    idTipo: "tipoModal",
+                    placeholderTipo: "Tipo",
+                    funcTipo: setTipoModal,
+                    valueTipo: tipoModal,
+
+                    idMarca: "marcaModal",
+                    placeholderMarca: "Marca",
+                    funcMarca: setMarcaModal,
+                    valueMarca: marcaModal,
+
+                    idNome: "nomeModal",
+                    placeholderNome: "nomeModal",
+                    funcNome: setNomeModal,
+                    valueNome: nomeModal,
+
+                    idCa: "caModal",
+                    placeholderCa: "CA",
+                    funcCa: setCaModal,
+                    valueCa: caModal,
+
+                    idDatav: "validadeModal",
+                    placeholderDatav: "Data de validade",
+                    funcDatav: setDatavModal,
+                    valueDatav: datavModal
+
                 }}
             />
             <div style={{
