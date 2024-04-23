@@ -3,6 +3,8 @@ import Table from "../../component/table";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault";
+import ModalCadastro from "../../component/modal/index.jsx"
+import moment from "moment";
 
 
 const Epi = () => {
@@ -12,6 +14,12 @@ const Epi = () => {
     const [ca, setCa] = useState("")
     const [datav, setDatav] = useState("")
     const [data, setData] = useState([])
+    const [tipoModal, setTipoModal] = useState("")
+    const [marcaModal, setMarcaModal] = useState("")
+    const [nomeModal, setNomeModal] = useState("")
+    const [caModal, setCaModal] = useState("")
+    const [datavModal, setDatavModal] = useState("")
+
 
     const navigate = useNavigate()
 
@@ -72,18 +80,23 @@ const Epi = () => {
             .then((response) => {
                 let responseData = response.data.tabela;
                 console.log(responseData)
-                let teste = responseData.filter((x) => x.nome == nome || x.ca == ca)
-                const objectsData = teste.map((element) => {
-                    return {
+                let x = datav.split("/")
+                let date = x[2] + "-" + x[1] + "-" + x[0]
+                let date2 = date + "T00:00:00.000Z"
+                let filtro = responseData.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipo || x.marca == marca || x.validade == date2)
+                const objectsData = filtro.map((element) => {
+                    let date = element.validade;
+                    date = moment(date);
+                    date = date.utc().format("DD/MM/YYYY");
+                    return ({
                         tipo: element.tipo,
                         marca: element.marca,
                         nome: element.nome,
                         ca: element.ca,
-                        validade: element.validade
-                    };
+                        validade: date
+                    });
                 });
                 setData(objectsData)
-                console.log(objectsData)
             })
             .catch((error) => {
                 console.log(error);
@@ -133,6 +146,38 @@ const Epi = () => {
                     placeholder: "Data de validade",
                     func: setDatav,
                     value: datav
+                }}
+            />
+            <ModalCadastro
+                info={{
+                    metodo: "Cadastrar",
+                    titulo: "Cadastro",
+
+                    idTipo: "tipoModal",
+                    placeholderTipo: "Tipo",
+                    funcTipo: setTipoModal,
+                    valueTipo: tipoModal,
+
+                    idMarca: "marcaModal",
+                    placeholderMarca: "Marca",
+                    funcMarca: setMarcaModal,
+                    valueMarca: marcaModal,
+
+                    idNome: "nomeModal",
+                    placeholderNome: "nomeModal",
+                    funcNome: setNomeModal,
+                    valueNome: nomeModal,
+
+                    idCa: "caModal",
+                    placeholderCa: "CA",
+                    funcCa: setCaModal,
+                    valueCa: caModal,
+
+                    idDatav: "validadeModal",
+                    placeholderDatav: "Data de validade",
+                    funcDatav: setDatavModal,
+                    valueDatav: datavModal
+
                 }}
             />
             <div style={{

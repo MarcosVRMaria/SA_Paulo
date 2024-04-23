@@ -8,11 +8,21 @@ import axios from "axios";
 const EmployeeManagement = () => {
   const [matricula, setMatricula] = useState("");
   const [nome, setNome] = useState("");
-  const [setor, setSetor] = useState();
-  const [grupo, setGrupo] = useState();
-  const [data,setData] = useState ([])
+  const [setor, setSetor] = useState([]);
+  const [grupo, setGrupo] = useState("");
+  const [data, setData] = useState([]);
+  const [userChoiceSetor, setUserChoiceSetor] = useState("");
+  const [userChoiceGrupo, setUserChoiceGrupo] = useState("");
 
   const columns = [
+    {
+      name: "Nome",
+      selector: (row) => row.funcionaio,
+      sortable: true,
+      filter: true,
+      id: "nome",
+      width: "200px",
+    },
     {
       name: "Setor",
       selector: (row) => row.setor,
@@ -31,14 +41,6 @@ const EmployeeManagement = () => {
       width: "200px",
     },
     {
-      name: "Nome",
-      selector: (row) => row.nome,
-      sortable: true,
-      filter: true,
-      id: "nome",
-      width: "200px",
-    },
-    {
       name: "Matrícula",
       selector: (row) => row.matricula,
       sortable: true,
@@ -48,7 +50,9 @@ const EmployeeManagement = () => {
     },
   ];
 
-  const click = () => {};
+  const click = () => {
+    filtro();
+  };
   useEffect(() => {
     let config = {
       method: "get",
@@ -65,31 +69,56 @@ const EmployeeManagement = () => {
           return {
             funcionaio: element.nome,
             matricula: element.matricula,
-            grupo: element.homogeneo,
+            grupo: element.homogenio,
             setor: element.setor,
           };
         });
-        console.log(objectsData);
-        setData(objectsData)
+        const setorData = objectsData.map((element) => {
+          return {
+            value: element.setor,
+            label: element.setor,
+          };
+        });
+        const grupoData = objectsData.map((element) => {
+          return {
+            value: element.grupo,
+            label: element.grupo,
+          };
+        });
+        setGrupo(grupoData);
+        setSetor(setorData);
+        setData(objectsData);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  const filtro = () => {
+    let filtro = data.filter(
+      (element) =>
+        element.setor == userChoiceSetor && element.grupo == userChoiceGrupo
+    );
+    console.log(filtro);
+  };
   return (
     <div>
-      <Dropdown
-        placeholder={"Setor"}
-        selectedOption={setor}
-        setSelectOption={setSetor}
-        options={[]}
-      />
-      <Dropdown
-        placeholder={"Grupo"}
-        selectedOption={grupo}
-        setSelectOption={setGrupo}
-        options={[]}
-      />
+      {setor.length > 0 && (
+        <Dropdown
+          placeholder={"Setor"}
+          selectedOption={userChoiceSetor}
+          setSelectOption={setUserChoiceSetor}
+          options={setor}
+        />
+      )}
+      {grupo.length > 0 && (
+        <Dropdown
+          placeholder={"Grupo"}
+          selectedOption={userChoiceGrupo}
+          setSelectOption={setUserChoiceGrupo}
+          options={grupo}
+        />
+      )}
       <InputTextDefault
         info={{
           id: "Nome",
@@ -108,9 +137,11 @@ const EmployeeManagement = () => {
       />
 
       <div style={{ padding: "20px" }}>
-        <BigButton text={"AAAAAAAAAAA"} onClick={click} />
         <Table columns={columns} data={data} select={true} />
       </div>
+      <BigButton text={"Cadastrar funcionario"} onClick={click} />
+      <BigButton text={"Editar"} onClick={click} />
+      <BigButton text={"Remover"} onClick={click} />
     </div>
   );
 };
