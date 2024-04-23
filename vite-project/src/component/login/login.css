@@ -26,7 +26,7 @@ border-radius: 5px;
 #password{
 border-radius: 5px;
 }
-#bnt-div{
+#bnt-login-div{
     padding-top: 20px;
 }
 #bnt{
@@ -35,7 +35,7 @@ border-radius: 5px;
     padding-left: 50px;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-radius: 20px;
+    border-radius: 10px;
     color: #ffff;
 }
 #bnt:active{

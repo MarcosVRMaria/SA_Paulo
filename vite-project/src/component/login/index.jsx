@@ -24,7 +24,7 @@ const LoginForm = ({ info, click }) => {
                 onChange={(e) => info.setPassword(e.target.value)}
                 value={info.password}
             />
-            <div id="bnt-div"> 
+            <div id="bnt-login-div"> 
             <button  id="bnt" onClick={click}>Login</button>
             </div>
         </div>

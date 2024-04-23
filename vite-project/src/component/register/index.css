@@ -1,0 +1,32 @@
+#register-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 100px;
+}
+
+#email,#user-register,#password-register,#password2 {
+    border-radius: 5px;
+    padding-top: 5px;
+}
+
+.bnt-register {
+    background-color: var(--main-color);
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    color: #ffff;
+}
+
+.bnt-register:active {
+    background-color: var(--second-color)
+}
+.div-email,.div-password2-register,.div-password-register,.div-user-register{
+padding-bottom: 15px;
+}
+.div-bnt-register{
+    padding-top: 10px;
+}
