@@ -3,7 +3,7 @@ import Table from "../../component/table";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault";
-import ModalCadastro from "../../component/modal/index.jsx"
+import ModalCadastro from "../../component/modalCadastrarEpi/index.jsx"
 import moment from "moment";
 
 
@@ -83,7 +83,7 @@ const Epi = () => {
                 let x = datav.split("/")
                 let date = x[2] + "-" + x[1] + "-" + x[0]
                 let date2 = date + "T00:00:00.000Z"
-                let filtro = responseData.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipo || x.marca == marca || x.validade == date2)
+                let filtro = responseData.filter.includes((x) => x.nome == nome || x.ca == ca || x.tipo == tipo || x.marca == marca || x.validade == date2)
                 const objectsData = filtro.map((element) => {
                     let date = element.validade;
                     date = moment(date);
@@ -104,6 +104,38 @@ const Epi = () => {
 
     };
 
+    const handleClickPost = async () => {
+        let x = datavModal.split("/")
+        let date = x[2] + "-" + x[1] + "-" + x[0]
+        let date2 = date + "T00:00:00.000Z"
+        console.log(date)
+        console.log(date2)
+        let data = JSON.stringify({
+            tipo: tipoModal,
+            marca: marcaModal,
+            nome: nomeModal,
+            ca: caModal,
+            validade: date2
+        });
+
+        let config = {
+            method: 'post',
+            url: `http://localhost:3000/cadastrarEpi`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: data
+        }
+
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        alert("Cadastro realizado com sucesso")
+    }
 
 
     return (
@@ -164,7 +196,7 @@ const Epi = () => {
                     valueMarca: marcaModal,
 
                     idNome: "nomeModal",
-                    placeholderNome: "nomeModal",
+                    placeholderNome: "Nome",
                     funcNome: setNomeModal,
                     valueNome: nomeModal,
 
@@ -176,7 +208,9 @@ const Epi = () => {
                     idDatav: "validadeModal",
                     placeholderDatav: "Data de validade",
                     funcDatav: setDatavModal,
-                    valueDatav: datavModal
+                    valueDatav: datavModal,
+
+                    cadastrar: handleClickPost
 
                 }}
             />
@@ -186,7 +220,7 @@ const Epi = () => {
                 left: "10%",
             }} >
                 {data.length > 0 &&
-                    <Table columns={columns} data={data} />}
+                    <Table columns={columns} data={data} select={true} />}
             </div>
             <button onClick={handleClickGet}>Pesquisa</button>
         </div>
