@@ -10,6 +10,7 @@ import './index.css'
  * @param {useState} setSelectedOption - um argumento do tipo useState Set
  * @param {Array} options - um argumento contendo todas as opões do dropdown
  */
+
  const Dropdown = ({selectedOption, setSelectOption,options,placeholder}) => {
 
   const handleTypeSelect = (e) => {
