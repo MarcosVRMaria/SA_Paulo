@@ -1,7 +1,10 @@
+import "./login.css"
+
 const LoginForm = ({ info, click }) => {
 
     return (
-        <div>
+        <div id="login-main">
+            <div id="div_user">
             <input
                 type="text"
                 id="user"
@@ -11,6 +14,7 @@ const LoginForm = ({ info, click }) => {
                 onChange={(e) => info.setUser(e.target.value)}
                 value={info.user}
             />
+            </div>
             <input
                 type="text"
                 id="password"
@@ -20,7 +24,9 @@ const LoginForm = ({ info, click }) => {
                 onChange={(e) => info.setPassword(e.target.value)}
                 value={info.password}
             />
-            <button onClick={click}>Login</button>
+            <div id="bnt-login-div"> 
+            <button  id="bnt" onClick={click}>Login</button>
+            </div>
         </div>
     );
 };

@@ -81,7 +81,7 @@ const Register = () => {
 
   }
   return (
-    <div>
+    <div id="content">
       <RegisterForm
         info={{
           setPassword2: setPassword2,
@@ -94,6 +94,15 @@ const Register = () => {
           user: user
         }}
         click={handleClick} />
+
+<div id="imagem">
+<img src="https://smslabore.com.br/wp-content/uploads/2017/10/Labore-Consuloria-EPI-Placa.png"  width="360" height="380"/>
+</div>
+<div className="RodaPe">
+<h1>bbbbbbbbb</h1>
+
+</div>
+
     </div>
   );
 };
