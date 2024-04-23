@@ -16,7 +16,7 @@ const LoginForm = ({ info, click,click2 }) => {
             />
             </div>
             <input
-                type="text"
+                type="password"
                 id="password"
                 required
                 minLength="3"
@@ -28,7 +28,7 @@ const LoginForm = ({ info, click,click2 }) => {
             <button  id="bnt" onClick={click}>Login</button>
             </div>
             <div id="bnt-login-div"> 
-            <button  id="bnt2" onClick={click2}>Cadastre-se</button>
+            <button  id="bnt" onClick={click2}>Cadastre-se</button>
             </div>
         </div>
     );

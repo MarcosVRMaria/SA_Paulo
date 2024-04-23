@@ -13,6 +13,7 @@ const EmployeeManagement = () => {
   const [data, setData] = useState([]);
   const [userChoiceSetor, setUserChoiceSetor] = useState("");
   const [userChoiceGrupo, setUserChoiceGrupo] = useState("");
+  const [filter, setFilter] = useState([])
 
   const columns = [
     {
@@ -90,16 +91,17 @@ const EmployeeManagement = () => {
         setData(objectsData);
       })
       .catch((error) => {
-        console.log(error);
       });
   }, []);
 
   const filtro = () => {
     let filtro = data.filter(
       (element) =>
-        element.setor == userChoiceSetor && element.grupo == userChoiceGrupo
+        (element.setor == userChoiceSetor && element.grupo == userChoiceGrupo && element.funcionaio == nome && element.matricula == matricula)
+        || element.setor == userChoiceSetor || element.grupo == userChoiceGrupo || element.funcionaio == nome || element.matricula == matricula
     );
     console.log(filtro);
+    setFilter(filtro)
   };
   return (
     <div>
@@ -137,7 +139,10 @@ const EmployeeManagement = () => {
       />
 
       <div style={{ padding: "20px" }}>
-        <Table columns={columns} data={data} select={true} />
+        {filter.length == 0 &&
+          <Table columns={columns} data={data} select={true} />}
+        {filter.length > 0 &&
+          <Table columns={columns} data={filter} select={true} />}
       </div>
       <BigButton text={"Cadastrar funcionario"} onClick={click} />
       <BigButton text={"Editar"} onClick={click} />
