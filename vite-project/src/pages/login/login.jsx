@@ -9,7 +9,9 @@ const Login = () => {
     const [user, setUser] = useState("");
 
     const navigate = useNavigate();
-
+    const handleClick2 = async () => {
+        navigate('/cadastro')
+    }
     const handleClick = async () => {
 
         let data = JSON.stringify({
@@ -49,14 +51,15 @@ const Login = () => {
                     setUser: setUser,
                     user: user
                 }}
-                click={handleClick} />
-<div id="imagem">
-<img src="https://smslabore.com.br/wp-content/uploads/2017/10/Labore-Consuloria-EPI-Placa.png"  width="320" height="300"/>
-</div>
-<div className="RodaPe">
-<h1>aaaaaaa</h1>
+                click={handleClick}
+                click2={handleClick2} />
+            <div id="imagem">
+                <img src="https://smslabore.com.br/wp-content/uploads/2017/10/Labore-Consuloria-EPI-Placa.png" width="320" height="300" />
+            </div>
+            <div className="RodaPe">
+                <h1>aaaaaaa</h1>
 
-</div>
+            </div>
         </div>
     );
 }

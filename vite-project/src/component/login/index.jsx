@@ -1,6 +1,6 @@
 import "./login.css"
 
-const LoginForm = ({ info, click }) => {
+const LoginForm = ({ info, click,click2 }) => {
 
     return (
         <div id="login-main">
@@ -26,6 +26,9 @@ const LoginForm = ({ info, click }) => {
             />
             <div id="bnt-login-div"> 
             <button  id="bnt" onClick={click}>Login</button>
+            </div>
+            <div id="bnt-login-div"> 
+            <button  id="bnt2" onClick={click2}>Cadastre-se</button>
             </div>
         </div>
     );

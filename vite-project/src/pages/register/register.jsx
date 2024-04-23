@@ -1,12 +1,14 @@
 import { useState } from "react";
 import RegisterForm from "../../component/register";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"
 
 const Register = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password2, setPassword2] = useState("");
+  const navigate = useNavigate();
 
   const handleClick = async () => {
 
@@ -42,6 +44,8 @@ const Register = () => {
       .catch((error) => {
         console.log(error);
       });
+      alert("Cadastro realizado com sucesso")
+      navigate('/login')
   };
 
 
