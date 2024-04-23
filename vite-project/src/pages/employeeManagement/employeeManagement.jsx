@@ -8,10 +8,11 @@ import axios from "axios";
 const EmployeeManagement = () => {
   const [matricula, setMatricula] = useState("");
   const [nome, setNome] = useState("");
-  const [setor, setSetor] = useState();
-  const [grupo, setGrupo] = useState();
+  const [setor, setSetor] = useState([]);
+  const [grupo, setGrupo] = useState("");
   const [data, setData] = useState([]);
-  const [userChoiceSetor, setUserChoiceSetor] = useState()
+  const [userChoiceSetor, setUserChoiceSetor] = useState("");
+  const [userChoiceGrupo, setUserChoiceGrupo] = useState("");
 
   const columns = [
     {
@@ -87,7 +88,6 @@ const EmployeeManagement = () => {
         setGrupo(grupoData);
         setSetor(setorData);
         setData(objectsData);
-        console.log(setor);
       })
       .catch((error) => {
         console.log(error);
@@ -95,25 +95,30 @@ const EmployeeManagement = () => {
   }, []);
 
   const filtro = () => {
-    console.log(userChoiceSetor)
-    console.log(setor)
-    let filtro = data.filter((element) => element.setor == setor);
+    let filtro = data.filter(
+      (element) =>
+        element.setor == userChoiceSetor && element.grupo == userChoiceGrupo
+    );
     console.log(filtro);
   };
   return (
     <div>
-      <Dropdown
-        placeholder={"Setor"}
-        selectedOption={userChoiceSetor}
-        setSelectOption={setUserChoiceSetor}
-        options={setor}
-      />
-      <Dropdown
-        placeholder={"Grupo"}
-        selectedOption={grupo}
-        setSelectOption={setGrupo}
-        options={grupo}
-      />
+      {setor.length > 0 && (
+        <Dropdown
+          placeholder={"Setor"}
+          selectedOption={userChoiceSetor}
+          setSelectOption={setUserChoiceSetor}
+          options={setor}
+        />
+      )}
+      {grupo.length > 0 && (
+        <Dropdown
+          placeholder={"Grupo"}
+          selectedOption={userChoiceGrupo}
+          setSelectOption={setUserChoiceGrupo}
+          options={grupo}
+        />
+      )}
       <InputTextDefault
         info={{
           id: "Nome",
@@ -134,7 +139,9 @@ const EmployeeManagement = () => {
       <div style={{ padding: "20px" }}>
         <Table columns={columns} data={data} select={true} />
       </div>
-      <BigButton text={"AAAAAAAAAAA"} onClick={click} />
+      <BigButton text={"Cadastrar funcionario"} onClick={click} />
+      <BigButton text={"Editar"} onClick={click} />
+      <BigButton text={"Remover"} onClick={click} />
     </div>
   );
 };

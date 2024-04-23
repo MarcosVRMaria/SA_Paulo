@@ -1,11 +1,7 @@
 import Select from 'react-select';
 import './index.css'
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
+
 
 /**
  * Componente de Dropdown em react
@@ -14,15 +10,22 @@ const options = [
  * @param {useState} setSelectedOption - um argumento do tipo useState Set
  * @param {Array} options - um argumento contendo todas as opões do dropdown
  */
- const Dropdown = ({selectedOption, setSelectedOption,options,placeholder}) => {
+ const Dropdown = ({selectedOption, setSelectOption,options,placeholder}) => {
+
+  const handleTypeSelect = (e) => {
+    setSelectOption(e.value);
+  };
 
   return (
     <div className="dropdown">
       <Select
         placeholder={placeholder}
         defaultValue={selectedOption}
-        onChange={setSelectedOption}
+        onChange={handleTypeSelect}
         options={options}
+        // value={options.filter(function (option) {
+        //   return option.value === selectedOption;
+        // })}
       />
     </div>
   );
