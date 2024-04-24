@@ -66,13 +66,14 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div id="content">
       <div
         style={{
           position: "fixed",
           top: "25%",
           left: "10%",
         }}
+        id="coluna-home"
       >
         <Table columns={columns} data={data} select={true} />
       </div>
@@ -89,6 +90,9 @@ const Home = () => {
         <Card name={"Gerenciar funcionário"} route={"/funcionarios"} />
         <Card name={"Gerenciar empréstimo"} route={"/emprestimos"} />
         <Card name={"Histórico"} route={"/historico"} />
+      </div>
+      <div className="RodaPe">
+        <h1>ccccccccc</h1>
       </div>
     </div>
   );
