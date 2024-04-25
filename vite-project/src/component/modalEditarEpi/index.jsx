@@ -78,4 +78,4 @@ function ModalEditar({ info }) {
     );
 }
 
-export default ModalCadastro;
+export default ModalEditar;

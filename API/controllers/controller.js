@@ -185,11 +185,11 @@ const deleteApagarEmprestimos = async (req, res) => {
 
 const putAtualizarEpi = async (req, res) => {
     try {
-        const id = req.params.id
+        const ca = req.params.ca
         const info = req.body
         const epiAtualizada = await tabelas.Epi.update(info, {
             where: {
-                id: id
+                ca: ca
             }
         })
         res.status(201).send({ epiAtualizada })
@@ -203,6 +203,7 @@ const putAtualizarFuncionario = async (req, res) => {
     try {
         const id = req.params.id
         const info = req.body
+        console.log(info)
         const funcionarioAtualizado = await tabelas.Funcionarios.update(info, {
             where: {
                 id: id
