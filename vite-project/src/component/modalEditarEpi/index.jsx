@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import '../modal/index.css'
+import './index.css'
 import InputTextDefault from '../inputTextDefault';
 
-function ModalCadastro({ info }) {
+function ModalEditar({ info }) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -71,7 +71,7 @@ function ModalCadastro({ info }) {
                     <Button variant="secondary" onClick={handleClose}>
                         Fechar
                     </Button>
-                    <Button variant="primary">Understood</Button>
+                    <Button variant="primary" onClick={info.editar}>Editar</Button>
                 </Modal.Footer>
             </Modal>
         </>
