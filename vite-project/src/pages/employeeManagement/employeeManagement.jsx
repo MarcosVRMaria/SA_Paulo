@@ -96,10 +96,7 @@ const EmployeeManagement = () => {
 
   const filtro = () => {
     let filtro = data.filter(
-      (element) =>
-        (element.setor == userChoiceSetor && element.grupo == userChoiceGrupo && element.funcionaio == nome && element.matricula == matricula)
-        || element.setor == userChoiceSetor || element.grupo == userChoiceGrupo || element.funcionaio == nome || element.matricula == matricula
-    );
+      (element) => element.setor == userChoiceSetor || element.grupo == userChoiceGrupo || element.funcionaio == nome || element.matricula == matricula);
     console.log(filtro);
     setFilter(filtro)
   };

@@ -22,7 +22,7 @@ function ModalCadastro({ info }) {
                 backdrop="static"
                 keyboard={false}
             >
-                <Modal.Header closeButton>
+                <Modal.Header >
                     <Modal.Title>{info.titulo}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
