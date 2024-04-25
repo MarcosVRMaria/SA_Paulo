@@ -3,6 +3,8 @@ import InputTextDefault from "../../component/inputTextDefault/index";
 import { useState, useEffect } from "react";
 import Dropdown from "../../component/dropdown";
 import Table from "../../component/table";
+import SearchButton from "../../component/searchbutton";
+import ModalCadastroFuncionario from "../../component/modalCadastroFuncionario";
 import axios from "axios";
 
 const EmployeeManagement = () => {
@@ -14,6 +16,13 @@ const EmployeeManagement = () => {
   const [userChoiceSetor, setUserChoiceSetor] = useState("");
   const [userChoiceGrupo, setUserChoiceGrupo] = useState("");
   const [filter, setFilter] = useState([])
+  const [tableChoice, setTableChoice] = useState()
+
+
+  const [setorModalCadastro, setSetorModalCadastro] = useState("")
+  const [grupoModalCadastro, setGrupoModalCadastro] = useState("")
+  const [nomeModalCadastro, setNomeModalCadastro] = useState("")
+  const [matriculaModalCadastro, setMatriculaModalCadastro] = useState("")
 
   const columns = [
     {
@@ -51,10 +60,11 @@ const EmployeeManagement = () => {
     },
   ];
 
-  const click = () => {
-    filtro();
-  };
   useEffect(() => {
+    getAllData()
+  }, [data]);
+
+  const getAllData = () => {
     let config = {
       method: "get",
       url: "http://localhost:3000/funcinarios",
@@ -91,13 +101,52 @@ const EmployeeManagement = () => {
         setData(objectsData);
       })
       .catch((error) => {
+        console.log(error)
       });
-  }, []);
+  }
+
+  const search = () => {
+    filtro();
+  };
+
+  const handleClickPost = async () => {
+
+    let filtroCadastro = data.filter((element) => element.matricula == matriculaModalCadastro)
+    console.log(filtroCadastro)
+    if (filtroCadastro.length > 0) {
+      return alert("Matrícula já existente")
+
+    }
+    let dataPost = JSON.stringify({
+      nome: nomeModalCadastro,
+      matricula: matriculaModalCadastro,
+      homogenio: grupoModalCadastro,
+      setor: setorModalCadastro
+    });
+
+    let config = {
+      method: 'post',
+      url: `http://localhost:3000/cadastrarFuncionario`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: dataPost
+    }
+
+    axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    getAllData()
+    alert("Cadastro realizado com sucesso")
+  }
 
   const filtro = () => {
     let filtro = data.filter(
       (element) => element.setor == userChoiceSetor || element.grupo == userChoiceGrupo || element.funcionaio == nome || element.matricula == matricula);
-    console.log(filtro);
     setFilter(filtro)
   };
   return (
@@ -134,16 +183,43 @@ const EmployeeManagement = () => {
           func: setMatricula,
         }}
       />
+      <SearchButton onClick={search} />
 
       <div style={{ padding: "20px" }}>
         {filter.length == 0 &&
-          <Table columns={columns} data={data} select={true} />}
+          <Table columns={columns} data={data} select={true} selectFunc={setTableChoice} />}
         {filter.length > 0 &&
-          <Table columns={columns} data={filter} select={true} />}
+          <Table columns={columns} data={filter} select={true} selectFunc={setTableChoice} />}
       </div>
-      <BigButton text={"Cadastrar funcionario"} onClick={click} />
-      <BigButton text={"Editar"} onClick={click} />
-      <BigButton text={"Remover"} onClick={click} />
+      <ModalCadastroFuncionario
+        info={{
+          metodo: "Cadastrar",
+          titulo: "Cadastro",
+
+          idSetor: "setorModalCadastro",
+          placeholderSetor: "Setor",
+          funcSetor: setSetorModalCadastro,
+          valueSetor: setorModalCadastro,
+
+          idGrupo: "grupoModalCadastro",
+          placeholderGrupo: "Grupo",
+          funcGrupo: setGrupoModalCadastro,
+          valueGrupo: grupoModalCadastro,
+
+          idNome: "nomeModalCadastro",
+          placeholderNome: "Nome",
+          funcNome: setNomeModalCadastro,
+          valueNome: nomeModalCadastro,
+
+          idMatricula: "matriculaModalCadastro",
+          placeholderMatricula: "Matrícula",
+          funcMatricula: setMatriculaModalCadastro,
+          valueMatricula: matriculaModalCadastro,
+          cadastrar: handleClickPost
+
+        }} />
+      <BigButton text={"Editar"} />
+      <BigButton text={"Remover"} />
     </div>
   );
 };
