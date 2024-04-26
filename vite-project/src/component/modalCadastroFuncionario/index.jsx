@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import '../modal/index.css'
+import '../modalCadastroFuncionario/index.css'
 import InputTextDefault from '../inputTextDefault';
 
 function ModalCadastroFuncionario({ info }) {
