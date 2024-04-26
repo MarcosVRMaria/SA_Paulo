@@ -6,7 +6,6 @@ const Table = ({ data, columns, select, selectFunc }) => {
   if (!select) {
     select = false
   }
-
   const customStyles = {
     table:{
       style:{
@@ -54,13 +53,17 @@ const Table = ({ data, columns, select, selectFunc }) => {
     },
   };
 
-
+  const handleChange = ({ selectedRows }) => {
+    // You can set state or dispatch with something like Redux so we can use the retrieved data
+    selectFunc(selectedRows);
+  };
 
   return (
 
     <DataTable style={{
     }} columns={columns} data={data} selectableRows={select} customStyles={customStyles} onSelectedRowsChange={selectFunc} />
   )
+
 }
 
 export default Table;

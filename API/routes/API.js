@@ -13,6 +13,9 @@ router.post('/cadastrarUsuario', controller.postUsuario)
 router.post('/cadastrarEpi', controller.postEpi)
 router.post('/cadastrarFuncionario', controller.postFuncionario)
 router.post('/cadastrarEmprestimo', controller.postEmprestimo)
+router.put('/editarEpi/:ca', controller.putAtualizarEpi)
+router.put('/editarFuncionario',controller.putAtualizarFuncionario)
+router.put('/editarEmprestimo',controller.putAtualizarEmprestimos)
 
 
 

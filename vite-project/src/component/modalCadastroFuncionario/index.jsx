@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import '../modal/index.css'
 import InputTextDefault from '../inputTextDefault';
 
-function ModalCadastro({ info }) {
+function ModalCadastroFuncionario({ info }) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -16,30 +16,30 @@ function ModalCadastro({ info }) {
                 {info.metodo}
             </Button>
 
-            <Modal
+            <Modal style={{background: 'black'}}
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
             >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>{info.titulo}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <InputTextDefault
                         info={{
-                            id: info.idTipo,
-                            placeholder: info.placeholderTipo,
-                            func: info.funcTipo,
-                            value: info.valueTipo
+                            id: info.idSetor,
+                            placeholder: info.placeholderSetor,
+                            func: info.funcSetor,
+                            value: info.valueSetor
                         }}
                     />
                     <InputTextDefault
                         info={{
-                            id: info.idMarca,
-                            placeholder: info.placeholderMarca,
-                            func: info.funcMarca,
-                            value: info.valueMarca
+                            id: info.idGrupo,
+                            placeholder: info.placeholderGrupo,
+                            func: info.funcGrupo,
+                            value: info.valueGrupo
                         }}
                     />
                     <InputTextDefault
@@ -52,30 +52,23 @@ function ModalCadastro({ info }) {
                     />
                     <InputTextDefault
                         info={{
-                            id: info.idCa,
-                            placeholder: info.placeholderCa,
-                            func: info.funcCa,
-                            value: info.valueCa
+                            id: info.idMatricula,
+                            placeholder: info.placeholderMatricula,
+                            func: info.funcMatricula,
+                            value: info.valueMatricula
                         }}
                     />
-                    <InputTextDefault
-                        info={{
-                            id: info.idDatav,
-                            placeholder: info.placeholderDatav,
-                            func: info.funcDatav,
-                            value: info.valueDatav
-                        }}
-                    />
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Fechar
                     </Button>
-                    <Button variant="primary">Understood</Button>
+                    <Button variant="primary" onClick={info.cadastrar}>Cadastrar</Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
 }
 
-export default ModalCadastro;
+export default ModalCadastroFuncionario;
