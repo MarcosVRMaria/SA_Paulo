@@ -66,7 +66,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div id="content">
+    <div className="content-home">
       <div
         style={{
           position: "fixed",
@@ -77,24 +77,28 @@ const Home = () => {
       >
         <Table columns={columns} data={data} select={true} />
       </div>
-      <div
-        style={{
-          position: "fixed",
-          top: "15%",
-          left: "50%",
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-        }}
-      >
+      <div>
+        
+        <div className="content-bnt-home">
+          
+        <div className="bnt-epi">
         <Card name={"Gerenciar EPI"} route={"/epi"} />
+        </div>
+        <div className="bnt-funcionario">
         <Card name={"Gerenciar funcionário"} route={"/funcionarios"} />
+        </div>
+        <div className="bnt-emprestimo">
         <Card name={"Gerenciar empréstimo"} route={"/emprestimos"} />
+        </div>
+        <div className="bnt-historico">
         <Card name={"Histórico"} route={"/historico"} />
+        </div>
+        </div>
       </div>
       <div className="RodaPe">
         <h1>ccccccccc</h1>
       </div>
-    </div>
+      </div>
   );
 };
 

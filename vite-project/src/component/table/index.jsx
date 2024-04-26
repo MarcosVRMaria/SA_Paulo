@@ -11,7 +11,8 @@ const Table = ({ data, columns, select, selectFunc }) => {
     table:{
       style:{
         border:"solid 1px black",
-        borderRadius:"5px"
+        borderRadius:"5px",
+        borderColor:"#023f81"
       }},
     rows:{
       style:{
@@ -20,12 +21,12 @@ const Table = ({ data, columns, select, selectFunc }) => {
     },
     head: {
       style: {
-       
+       borderRadius: "5px"
       },
     },
     headRow: {
       style: {
-     
+        borderRadius: "5px",
         borderBottom : '0px',
         
 
