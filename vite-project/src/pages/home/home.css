@@ -1,9 +1,45 @@
+:root{
+    --background : #f2f2f2;
+    --main-color : #023f81;
+}
+
+.content-home{
+    background-color: var(--background);
+}
+
 [data-column-id="funcionario"].rdt_TableCol {
 width:fit-content  }
 
 [data-column-id="funcionario"].rdt_TableCol{
 border-color: black;
 border-width: 1;
-border: 1
-;
+border: 1;
+
+}
+
+.content-bnt-home{
+    position: fixed;
+  display: grid;
+  top: 20%;
+  left: 50%;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+
+}
+.bnt-epi{
+
+background-color: var(--main-color);
+padding-right: 20px;
+border-radius: 25px;
+text-align: center;
+
+}
+.bnt-historico{
+    background-color: var(--main-color);
+    padding-right: 20px;
+    border-radius: 25px;
+    text-align: center;
+}
+.bnt-epi,.bnt-historico,.bnt-emprestimo,.bnt-epi{
+    color: #ffff;
 }
