@@ -137,13 +137,16 @@ const postEmprestimo = async (req, res) => {
 
 const deleteApagarEpi = async (req, res) => {
     try {
-        const { id } = req.params
+        const ca = req.params.ca
+        console.log(typeof (req.params.ca))
+        let arrayDelete = req.params.ca.split(',')
+        console.log(arrayDelete)
         const epiApagada = await tabelas.Epi.destroy({
             where: {
-                id: id
+                ca: arrayDelete
             },
         })
-        res.status(200).send({ mensagem: "EPI apagada" })
+        res.status(200).send({ mensagem: "EPI apagada", })
     } catch (erro) {
         console.log(erro)
         res.status(404).send({ mensagem: 'Erro ao deletar EPI' })

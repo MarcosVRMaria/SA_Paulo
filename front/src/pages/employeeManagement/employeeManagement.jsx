@@ -64,6 +64,7 @@ const EmployeeManagement = () => {
     getAllData()
   },[] );
 
+
   const getAllData = () => {
     let config = {
       method: "get",
@@ -96,12 +97,14 @@ const EmployeeManagement = () => {
             label: element.grupo,
           };
         });
+
         // Chamando a função para remover itens duplicados
         const grupoDataSemDuplicados = removerItensDuplicados(grupoData);
         const setorDataSemDuplicados = removerItensDuplicados(setorData);
 
         setGrupo(grupoDataSemDuplicados);
         setSetor(setorDataSemDuplicados);
+
         setData(objectsData);
       })
       .catch((error) => {
@@ -112,6 +115,7 @@ const EmployeeManagement = () => {
   const search = () => {
     filtro();
   };
+
 
   // Função para remover itens duplicados do array de objetos
   const removerItensDuplicados = (array) => {

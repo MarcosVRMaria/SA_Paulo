@@ -4,6 +4,7 @@ const Card = ({name,route}) => {
 
     return(
         <Link to={route}>
+        <button >
         <button className="card">
             {name}
         </button>

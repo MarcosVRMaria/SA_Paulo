@@ -1,3 +1,37 @@
+
+:root{
+    --background : #f2f2f2;
+    --main-color : #023f81;
+    --second-color: #002f64;
+}
+#content{
+    display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+
+}
+#login-main{
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding-left: 100px;
+}
+#div_user{
+   padding-bottom: 20px;
+}
+#user{
+border-radius: 5px;
+}
+#password{
+border-radius: 5px;
+}
+#bnt-login-div{
+    padding-top: 20px;
+}
+#bnt{
+
 :root {
     --background: #f2f2f2;
     --main-color: #023f81;
@@ -37,11 +71,19 @@
 }
 
 #bnt {
+
     background-color: var(--main-color);
     padding-right: 50px;
     padding-left: 50px;
     padding-top: 5px;
     padding-bottom: 5px;
+
+    border-radius: 10px;
+    color: #ffff;
+}
+#bnt:active{
+    background-color: var(--second-color)
+    }
     border-radius: 5px;
     color: #ffff;
 }
@@ -63,3 +105,4 @@
 #bnt2:active {
     background-color: var(--second-color);
 }
+

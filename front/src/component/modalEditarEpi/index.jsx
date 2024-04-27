@@ -7,8 +7,28 @@ import InputTextDefault from '../inputTextDefault';
 function ModalEditar({ info }) {
     const [show, setShow] = useState(false);
 
+    const [tipoSetado, setTipoSetado] = useState("")
+    const [marcaSetado, setMarcaSetado] = useState("")
+    const [nomeSetado, setNomeSetado] = useState("")
+    const [caSetado, setCaSetado] = useState("")
+    const [datavSetado, setDatavSetado] = useState("")
+
+
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true)
+        info.funcTipo(info.select[0].tipo)
+        console.log(tipoSetado)
+        info.funcMarca(info.select[0].marca)
+        console.log(marcaSetado)
+        info.funcNome(info.select[0].nome)
+        console.log(nomeSetado)
+        info.funcCa(info.select[0].ca)
+        console.log(caSetado)
+        info.funcDatav(info.select[0].validade)
+        console.log(datavSetado)
+    };
+
 
     return (
         <>

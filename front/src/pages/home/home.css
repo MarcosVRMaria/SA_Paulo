@@ -1,3 +1,4 @@
+
 :root{
     --background : #f2f2f2;
     --main-color : #023f81;
@@ -13,6 +14,7 @@ width:fit-content  }
 [data-column-id="funcionario"].rdt_TableCol{
 border-color: black;
 border-width: 1;
+
 border: 1;
 
 }

@@ -29,6 +29,7 @@ const Epi = () => {
     const [filter, setFilter] = useState([])
     const [select, setSelect] = useState("")
     const [tipoSelect, setTipoSelect] = useState("")
+    const [marcaSelect, setMarcaSelect] = useState("")
 
 
     const navigate = useNavigate()
@@ -79,6 +80,22 @@ const Epi = () => {
         getAllData()
     }, [])
 
+    // Função para remover itens duplicados do array de objetos
+    const removerItensDuplicados = (array) => {
+        // Use um conjunto para manter apenas os objetos únicos
+        const conjunto = new Set();
+        return array.filter(obj => {
+            // Converta cada objeto em uma string para verificar sua unicidade
+            const objetoString = JSON.stringify(obj);
+            const objetoJaVisto = conjunto.has(objetoString);
+            if (!objetoJaVisto) {
+                conjunto.add(objetoString);
+                return true;
+            }
+            return false;
+        });
+    }
+
     const getAllData = (() => {
         let config = {
             method: 'get',
@@ -112,7 +129,19 @@ const Epi = () => {
                         label: element.tipo,
                     };
                 });
-                setTipo(tipoData)
+                const marcaData = objectsData.map((element) => {
+                    return {
+                        value: element.marca,
+                        label: element.marca,
+                    };
+                });
+
+                // Chamando a função para remover itens duplicados
+                const tipoDataSemDuplicados = removerItensDuplicados(tipoData);
+                const marcaDataSemDuplicados = removerItensDuplicados(marcaData);
+                setTipo(tipoDataSemDuplicados)
+                setMarca(marcaDataSemDuplicados)
+
             })
             .catch((error) => {
                 console.log(error);
@@ -123,10 +152,8 @@ const Epi = () => {
         let x = datav.split("/")
         let date = x[2] + "-" + x[1] + "-" + x[0]
         let date2 = date + "T00:00:00.000Z"
-        let filtro = data.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipoSelect || x.marca == marca || x.validade == date2)
+        let filtro = data.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipoSelect || x.marca == marcaSelect || x.validade == date2)
         setFilter(filtro)
-        console.log(data)
-
     };
 
     const handleClickPost = async () => {
@@ -152,8 +179,6 @@ const Epi = () => {
             data: datacadastro
         }
         let filtroCadastroCa = data.filter((x) => x.ca == caModalCadastro)
-        // let filtroCadastroTipo = data.filter((x) => x.tipo == tipoModalCadastro)
-        // let filtroCadastroMarca = data.filter((x) => x.marca == marcaModalCadastro)
         if (filtroCadastroCa.length > 0) {
             return alert('CA já existente')
         }
@@ -167,9 +192,37 @@ const Epi = () => {
             });
         alert("Cadastro realizado com sucesso")
         getAllData()
+
+    }
+    const handleClickDelete = async () => {
+        const objectsData = select.map((element) => {
+            return (element.ca);
+        });
+        console.log(objectsData)
+        let config = {
+            method: 'delete',
+            url: `http://localhost:3000/deleteEpi/${objectsData}`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        alert("Remoção realizada com sucesso")
+        getAllData()
     }
 
     const handleClickPut = async () => {
+        if (select.length > 1 || select.length == 0) {
+            return alert("Selecione apenas um para editar.")
+        }
+
 
         let x = datavModalEditar.split("/")
         let date = x[2] + "-" + x[1] + "-" + x[0]
@@ -217,14 +270,17 @@ const Epi = () => {
                     options={tipo}
                 />)
             }
-            <InputTextDefault
-                info={{
-                    id: "marca",
-                    placeholder: "Marca",
-                    func: setMarca,
-                    value: marca
-                }}
-            />
+
+            {marca.length > 0 && (
+                <Dropdown
+                    placeholder={"Marca"}
+                    selectedOption={marcaSelect}
+                    setSelectOption={setMarcaSelect}
+                    options={marca}
+                />)
+            }
+
+
             <InputTextDefault
                 info={{
                     id: "nome",
@@ -286,6 +342,8 @@ const Epi = () => {
 
             <ModalEditar
                 info={{
+                    select: select,
+
                     metodo: "Editar",
                     titulo: "Editar",
 
@@ -328,9 +386,11 @@ const Epi = () => {
 
                 }
                 {filter.length > 0 &&
-                    <Table columns={columns} data={filter} select={true} />}
+                    <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
             </div>
             <button onClick={handleClickGet}>Pesquisa</button>
+            <button onClick={handleClickDelete}>Apagar</button>
+
         </div>
 
     )

@@ -16,6 +16,7 @@ router.post('/cadastrarEmprestimo', controller.postEmprestimo)
 router.put('/editarEpi/:ca', controller.putAtualizarEpi)
 router.put('/editarFuncionario',controller.putAtualizarFuncionario)
 router.put('/editarEmprestimo',controller.putAtualizarEmprestimos)
+router.delete('/deleteEpi/:ca',controller.deleteApagarEpi)
 
 
 
