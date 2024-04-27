@@ -75,7 +75,7 @@ const Home = () => {
         }}
         id="coluna-home"
       >
-        <Table columns={columns} data={data} select={true} />
+        <Table columns={columns} data={data} select={false} />
       </div>
       <div>
         

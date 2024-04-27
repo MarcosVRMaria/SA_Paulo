@@ -16,7 +16,7 @@ const EmployeeManagement = () => {
   const [userChoiceSetor, setUserChoiceSetor] = useState("");
   const [userChoiceGrupo, setUserChoiceGrupo] = useState("");
   const [filter, setFilter] = useState([])
-  const [tableChoice, setTableChoice] = useState()
+  const [tableChoice, setTableChoice] = useState("")
 
 
   const [setorModalCadastro, setSetorModalCadastro] = useState("")
@@ -62,7 +62,7 @@ const EmployeeManagement = () => {
 
   useEffect(() => {
     getAllData()
-  },[data] );
+  },[] );
 
   const getAllData = () => {
     let config = {

@@ -56,12 +56,13 @@ const Table = ({ data, columns, select, selectFunc }) => {
   const handleChange = ({ selectedRows }) => {
     // You can set state or dispatch with something like Redux so we can use the retrieved data
     selectFunc(selectedRows);
+    console.log(selectedRows)
   };
 
   return (
 
     <DataTable style={{
-    }} columns={columns} data={data} selectableRows={select} customStyles={customStyles} onSelectedRowsChange={selectFunc} />
+    }} columns={columns} data={data} selectableRows={select} customStyles={customStyles} onSelectedRowsChange={handleChange} />
   )
 
 }
