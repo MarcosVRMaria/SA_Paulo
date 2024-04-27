@@ -7,7 +7,7 @@ import Login from './pages/login/login.jsx';
 import Home from './pages/home/home.jsx';
 import Epi from './pages/epi/epi.jsx';
 import EmployeeManagement from './pages/employeeManagement/employeeManagement.jsx';
-
+import Emprestimos from './pages/emprestimos/emprestimos.jsx';
 
 const paginas = createBrowserRouter([
   {
@@ -24,13 +24,17 @@ const paginas = createBrowserRouter([
   }, {
     path: "/epi",
     element: <Epi />
-  },{
-    path:"/home",
-    element: <Home/>
+  }, {
+    path: "/home",
+    element: <Home />
   },
   {
-    path:"/funcionarios",
-    element: <EmployeeManagement/>
+    path: "/funcionarios",
+    element: <EmployeeManagement />
+  },
+  {
+    path: "/xe",
+    element: <Emprestimos />
   }
 ])
 
