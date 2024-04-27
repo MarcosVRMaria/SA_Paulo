@@ -149,10 +149,8 @@ const Epi = () => {
     })
 
     const handleClickGet = async () => {
-        let x = datav.split("/")
-        let date = x[2] + "-" + x[1] + "-" + x[0]
-        let date2 = date + "T00:00:00.000Z"
-        let filtro = data.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipoSelect || x.marca == marcaSelect || x.validade == date2)
+
+        let filtro = data.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipoSelect || x.marca == marcaSelect || x.validade == datav)
         setFilter(filtro)
     };
 
