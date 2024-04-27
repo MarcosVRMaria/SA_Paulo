@@ -16,7 +16,8 @@ function ModalCadastroFuncionario({ info }) {
                 {info.metodo}
             </Button>
 
-            <Modal style={{ background: 'black' }}
+            <Modal style={{background: 'black'}}
+
                 show={show}
                 onHide={handleClose}
                 backdrop="static"

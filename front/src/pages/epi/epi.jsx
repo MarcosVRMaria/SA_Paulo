@@ -31,6 +31,7 @@ const Epi = () => {
     const [tipoSelect, setTipoSelect] = useState("")
     const [marcaSelect, setMarcaSelect] = useState("")
 
+
     const navigate = useNavigate()
 
     const columns = [
@@ -140,6 +141,7 @@ const Epi = () => {
                 const marcaDataSemDuplicados = removerItensDuplicados(marcaData);
                 setTipo(tipoDataSemDuplicados)
                 setMarca(marcaDataSemDuplicados)
+
             })
             .catch((error) => {
                 console.log(error);
@@ -152,11 +154,9 @@ const Epi = () => {
         let date2 = date + "T00:00:00.000Z"
         let filtro = data.filter((x) => x.nome == nome || x.ca == ca || x.tipo == tipoSelect || x.marca == marcaSelect || x.validade == date2)
         setFilter(filtro)
-
     };
 
     const handleClickPost = async () => {
-
         let x = datavModalCadastro.split("/")
         let date = x[2] + "-" + x[1] + "-" + x[0]
         let date2 = date + "T00:00:00.000Z"
@@ -223,6 +223,7 @@ const Epi = () => {
             return alert("Selecione apenas um para editar.")
         }
 
+
         let x = datavModalEditar.split("/")
         let date = x[2] + "-" + x[1] + "-" + x[0]
         let date2 = date + "T00:00:00.000Z"
@@ -258,6 +259,7 @@ const Epi = () => {
         getAllData()
     }
 
+
     return (
         <div>
             {tipo.length > 0 && (
@@ -277,6 +279,7 @@ const Epi = () => {
                     options={marca}
                 />)
             }
+
 
             <InputTextDefault
                 info={{
@@ -340,6 +343,7 @@ const Epi = () => {
             <ModalEditar
                 info={{
                     select: select,
+
                     metodo: "Editar",
                     titulo: "Editar",
 
@@ -386,6 +390,7 @@ const Epi = () => {
             </div>
             <button onClick={handleClickGet}>Pesquisa</button>
             <button onClick={handleClickDelete}>Apagar</button>
+
         </div>
 
     )

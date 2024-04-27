@@ -16,7 +16,7 @@ const EmployeeManagement = () => {
   const [userChoiceSetor, setUserChoiceSetor] = useState("");
   const [userChoiceGrupo, setUserChoiceGrupo] = useState("");
   const [filter, setFilter] = useState([])
-  const [tableChoice, setTableChoice] = useState()
+  const [tableChoice, setTableChoice] = useState("")
 
 
   const [setorModalCadastro, setSetorModalCadastro] = useState("")
@@ -62,7 +62,8 @@ const EmployeeManagement = () => {
 
   useEffect(() => {
     getAllData()
-  }, [data]);
+  },[] );
+
 
   const getAllData = () => {
     let config = {
@@ -96,8 +97,14 @@ const EmployeeManagement = () => {
             label: element.grupo,
           };
         });
-        setGrupo(grupoData);
-        setSetor(setorData);
+
+        // Chamando a função para remover itens duplicados
+        const grupoDataSemDuplicados = removerItensDuplicados(grupoData);
+        const setorDataSemDuplicados = removerItensDuplicados(setorData);
+
+        setGrupo(grupoDataSemDuplicados);
+        setSetor(setorDataSemDuplicados);
+
         setData(objectsData);
       })
       .catch((error) => {
@@ -108,6 +115,24 @@ const EmployeeManagement = () => {
   const search = () => {
     filtro();
   };
+
+
+  // Função para remover itens duplicados do array de objetos
+  const removerItensDuplicados = (array) => {
+    // Use um conjunto para manter apenas os objetos únicos
+    const conjunto = new Set();
+    return array.filter(obj => {
+      // Converta cada objeto em uma string para verificar sua unicidade
+      const objetoString = JSON.stringify(obj);
+      const objetoJaVisto = conjunto.has(objetoString);
+      if (!objetoJaVisto) {
+        conjunto.add(objetoString);
+        return true;
+      }
+      return false;
+    });
+  }
+
 
   const handleClickPost = async () => {
 

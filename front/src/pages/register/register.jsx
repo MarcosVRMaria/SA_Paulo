@@ -102,6 +102,8 @@ const Register = () => {
 <div id="imagem">
 <img src="https://smslabore.com.br/wp-content/uploads/2017/10/Labore-Consuloria-EPI-Placa.png"  width="360" height="380"/>
 </div>
+
+
 <div className="RodaPe">
 <h1>bbbbbbbbb</h1>
 

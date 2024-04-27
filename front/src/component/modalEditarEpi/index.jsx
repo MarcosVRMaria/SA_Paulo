@@ -29,6 +29,7 @@ function ModalEditar({ info }) {
         console.log(datavSetado)
     };
 
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
