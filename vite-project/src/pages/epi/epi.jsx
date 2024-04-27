@@ -29,6 +29,7 @@ const Epi = () => {
     const [filter, setFilter] = useState([])
     const [select, setSelect] = useState("")
     const [tipoSelect, setTipoSelect] = useState("")
+    const [marcaSelect,setMarcaSelect]
 
 
     const navigate = useNavigate()
@@ -152,8 +153,6 @@ const Epi = () => {
             data: datacadastro
         }
         let filtroCadastroCa = data.filter((x) => x.ca == caModalCadastro)
-        // let filtroCadastroTipo = data.filter((x) => x.tipo == tipoModalCadastro)
-        // let filtroCadastroMarca = data.filter((x) => x.marca == marcaModalCadastro)
         if (filtroCadastroCa.length > 0) {
             return alert('CA já existente')
         }
@@ -215,6 +214,15 @@ const Epi = () => {
                     selectedOption={tipoSelect}
                     setSelectOption={setTipoSelect}
                     options={tipo}
+                />)
+            }
+
+            {marca.length > 0 && (
+                <Dropdown
+                    placeholder={"Marca"}
+                    selectedOption={marcaSelect}
+                    setSelectOption={setMarcaSelect}
+                    options={marca}
                 />)
             }
             <InputTextDefault
