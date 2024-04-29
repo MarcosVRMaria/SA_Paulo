@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import '../modal/index.css'
+import Dropdown from '../dropdown';
 import InputTextDefault from '../inputTextDefault';
 
-function ModalCadastroFuncionario({ info }) {
+function ModalCadastro({ info }) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -16,49 +16,51 @@ function ModalCadastroFuncionario({ info }) {
                 {info.metodo}
             </Button>
 
-            <Modal style={{background: 'black'}}
+            <Modal
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
             >
-                <Modal.Header>
+                <Modal.Header >
                     <Modal.Title>{info.titulo}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <InputTextDefault
-                        info={{
-                            id: info.idSetor,
-                            placeholder: info.placeholderSetor,
-                            func: info.funcSetor,
-                            value: info.valueSetor
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idGrupo,
-                            placeholder: info.placeholderGrupo,
-                            func: info.funcGrupo,
-                            value: info.valueGrupo
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idNome,
-                            placeholder: info.placeholderNome,
-                            func: info.funcNome,
-                            value: info.valueNome
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idMatricula,
-                            placeholder: info.placeholderMatricula,
-                            func: info.funcMatricula,
-                            value: info.valueMatricula
-                        }}
-                    />
 
+                    <Dropdown
+                        placeholder={"EPI"}
+                        selectedOption={info.epiSelect}
+                        setSelectOption={info.setEpiSelect}
+                        options={info.epi}
+                    />
+                    <Dropdown
+                        placeholder={"Nome do funcionário"}
+                        selectedOption={info.nomeSelect}
+                        setSelectOption={info.setNomeSelect}
+                        options={info.nome}
+                    />
+                    <Dropdown
+                        placeholder={"Matricula"}
+                        selectedOption={info.matriculaSelect}
+                        setSelectOption={info.setMatriculaSelect}
+                        options={info.matricula}
+                    />
+                    <InputTextDefault
+                        info={{
+                            id: info.idDatar,
+                            placeholder: info.placeholderDatar,
+                            func: info.funcDatar,
+                            value: info.valueDatar
+                        }}
+                    />
+                    <InputTextDefault
+                        info={{
+                            id: info.idDatad,
+                            placeholder: info.placeholderDatad,
+                            func: info.funcDatad,
+                            value: info.valueDatad
+                        }}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -71,4 +73,4 @@ function ModalCadastroFuncionario({ info }) {
     );
 }
 
-export default ModalCadastroFuncionario;
+export default ModalCadastro;

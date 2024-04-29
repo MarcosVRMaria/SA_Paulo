@@ -66,6 +66,7 @@ const Home = () => {
   }, []);
 
   return (
+
     <div className="content-home">
       <div
         style={{
@@ -73,9 +74,10 @@ const Home = () => {
           top: "25%",
           left: "10%",
         }}
+
         id="coluna-home"
       >
-        <Table columns={columns} data={data} select={true} />
+        <Table columns={columns} data={data} select={false} />
       </div>
       <div>
         
