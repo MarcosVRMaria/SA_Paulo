@@ -33,7 +33,7 @@ const paginas = createBrowserRouter([
     element: <EmployeeManagement />
   },
   {
-    path: "/xe",
+    path: "/emprestimos",
     element: <Emprestimos />
   }
 ])
