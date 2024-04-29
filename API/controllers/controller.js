@@ -137,8 +137,6 @@ const postEmprestimo = async (req, res) => {
 
 const deleteApagarEpi = async (req, res) => {
     try {
-        const ca = req.params.ca
-        console.log(typeof (req.params.ca))
         let arrayDelete = req.params.ca.split(',')
         console.log(arrayDelete)
         const epiApagada = await tabelas.Epi.destroy({
@@ -155,10 +153,11 @@ const deleteApagarEpi = async (req, res) => {
 
 const deleteApagarFuncionarios = async (req, res) => {
     try {
-        const { id } = req.params
-        const funcionariosApagada = await tabelas.Funcionarios.destroy({
+        let arrayDelete = req.params.matricula.split(',')
+        console.log(arrayDelete)
+        const funcApagada = await tabelas.Funcionarios.destroy({
             where: {
-                id: id
+                matricula: arrayDelete
             },
         })
         res.status(200).send({ mensagem: "Funcionario apagado" })
@@ -204,12 +203,12 @@ const putAtualizarEpi = async (req, res) => {
 
 const putAtualizarFuncionario = async (req, res) => {
     try {
-        const id = req.params.id
+        const matricula = req.params.funcionario
         const info = req.body
         console.log(info)
         const funcionarioAtualizado = await tabelas.Funcionarios.update(info, {
             where: {
-                id: id
+                matricula: matricula
             }
         })
         res.status(201).send({ funcionarioAtualizado })

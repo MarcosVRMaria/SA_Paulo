@@ -217,9 +217,6 @@ const Epi = () => {
     }
 
     const handleClickPut = async () => {
-        if (select.length > 1 || select.length == 0) {
-            return alert("Selecione apenas um para editar.")
-        }
 
 
         let x = datavModalEditar.split("/")
