@@ -4,22 +4,21 @@ import Modal from 'react-bootstrap/Modal';
 import './index.css'
 import InputTextDefault from '../inputTextDefault';
 
-function ModalEditar({ info }) {
+function ModalEditarFuncionario({ info }) {
     const [show, setShow] = useState(false);
-
-
     const handleClose = () => setShow(false);
-    const handleShow = () => {
 
+    const handleShow = () => {
         if (info.select.length > 1 || info.select.length == 0) {
             return alert("Selecione apenas um para editar.")
-        }    
+        } 
         setShow(true)
-        info.funcTipo(info.select[0].tipo)
-        info.funcMarca(info.select[0].marca)
-        info.funcNome(info.select[0].nome)
-        info.funcCa(info.select[0].ca)
-        info.funcDatav(info.select[0].validade)
+        info.funcSetor(info.select[0].setor)
+        info.funcGrupo(info.select[0].grupo)
+        info.funcNome(info.select[0].funcionaio)
+        info.funcMatricula(info.select[0].matricula)
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        console.log(info.select)
     };
 
 
@@ -41,18 +40,18 @@ function ModalEditar({ info }) {
                 <Modal.Body>
                     <InputTextDefault
                         info={{
-                            id: info.idTipo,
-                            placeholder: info.placeholderTipo,
-                            func: info.funcTipo,
-                            value: info.valueTipo
+                            id: info.idSetor,
+                            placeholder: info.placeholderSetor,
+                            func: info.funcSetor,
+                            value: info.valueSetor
                         }}
                     />
                     <InputTextDefault
                         info={{
-                            id: info.idMarca,
-                            placeholder: info.placeholderMarca,
-                            func: info.funcMarca,
-                            value: info.valueMarca
+                            id: info.idGrupo,
+                            placeholder: info.placeholderGrupo,
+                            func: info.funcGrupo,
+                            value: info.valueGrupo
                         }}
                     />
                     <InputTextDefault
@@ -65,18 +64,10 @@ function ModalEditar({ info }) {
                     />
                     <InputTextDefault
                         info={{
-                            id: info.idCa,
-                            placeholder: info.placeholderCa,
-                            func: info.funcCa,
-                            value: info.valueCa
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idDatav,
-                            placeholder: info.placeholderDatav,
-                            func: info.funcDatav,
-                            value: info.valueDatav
+                            id: info.idMatricula,
+                            placeholder: info.placeholderMatricula,
+                            func: info.funcMatricula,
+                            value: info.valueMatricula
                         }}
                     />
                 </Modal.Body>
@@ -91,4 +82,4 @@ function ModalEditar({ info }) {
     );
 }
 
-export default ModalEditar;
+export default ModalEditarFuncionario;

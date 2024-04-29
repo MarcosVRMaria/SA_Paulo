@@ -6,6 +6,8 @@ import Table from "../../component/table";
 import SearchButton from "../../component/searchbutton";
 import ModalCadastroFuncionario from "../../component/modalCadastroFuncionario";
 import axios from "axios";
+import ModalEditarFuncionario
+  from "../../component/modalEditarFuncionario";
 
 const EmployeeManagement = () => {
   const [matricula, setMatricula] = useState("");
@@ -23,6 +25,11 @@ const EmployeeManagement = () => {
   const [grupoModalCadastro, setGrupoModalCadastro] = useState("")
   const [nomeModalCadastro, setNomeModalCadastro] = useState("")
   const [matriculaModalCadastro, setMatriculaModalCadastro] = useState("")
+
+  const [setorModalEditar, setSetorModalEditar] = useState("")
+  const [grupoModalEditar, setGrupoModalEditar] = useState("")
+  const [nomeModalEditar, setNomeModalEditar] = useState("")
+  const [matriculaModalEditar, setMatriculaModalEditar] = useState("")
 
   const columns = [
     {
@@ -62,7 +69,7 @@ const EmployeeManagement = () => {
 
   useEffect(() => {
     getAllData()
-  },[] );
+  }, []);
 
 
   const getAllData = () => {
@@ -115,7 +122,64 @@ const EmployeeManagement = () => {
   const search = () => {
     filtro();
   };
+  const handleClickPut = async () => {
+    
+    if (tableChoice.length > 1 || tableChoice.length == 0) {
+        return alert("Selecione apenas um para editar.")
+    }
 
+
+    let data = JSON.stringify({
+        setor: setorModalEditar,
+        nome: nomeModalEditar,
+        matricula: matriculaModalEditar,
+        homogenio: grupoModalEditar,
+    });
+    console.log(data)
+
+    let config = {
+        method: 'put',
+        url: `http://localhost:3000/editarFuncionario/${matriculaModalEditar}`,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: data
+    }
+
+    axios.request(config)
+        .then((response) => {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    alert("Edição realizada com sucesso")
+    getAllData()
+}
+
+const handleClickDelete = async () => {
+  const objectsData = tableChoice.map((element) => {
+      return (element.matricula);
+  });
+  console.log(objectsData)
+  let config = {
+      method: 'delete',
+      url: `http://localhost:3000/deleteFuncionario/${objectsData}`,
+      headers: {
+          'Content-Type': 'application/json',
+      },
+  }
+
+  axios.request(config)
+      .then((response) => {
+          console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+  alert("Remoção realizada com sucesso")
+  getAllData()
+}
 
   // Função para remover itens duplicados do array de objetos
   const removerItensDuplicados = (array) => {
@@ -243,8 +307,37 @@ const EmployeeManagement = () => {
           cadastrar: handleClickPost
 
         }} />
-      <BigButton text={"Editar"} />
-      <BigButton text={"Remover"} />
+        <ModalEditarFuncionario 
+          info={{
+            select: tableChoice,
+
+            metodo: "Editar",
+            titulo: "Editar",
+
+            idSetor: "setorModalEditar",
+            placeholderSetor: "Setor",
+            funcSetor: setSetorModalEditar,
+            valueSetor: setorModalEditar,
+
+            idGrupo: "grupoModalEditar",
+            placeholderGrupo: "Grupo Homogeneo",
+            funcGrupo: setGrupoModalEditar,
+            valueGrupo: grupoModalEditar,
+
+            idNome: "nomeModalEditar",
+            placeholderNome: "Nome",
+            funcNome: setNomeModalEditar,
+            valueNome: nomeModalEditar,
+
+            idMatricula: "matriculaModalEditar",
+            placeholderMatricula: "Matrícula",
+            funcMatricula: setMatriculaModalEditar,
+            valueMatricula: matriculaModalEditar,
+
+            editar: handleClickPut
+
+        }}/>
+      <BigButton text={"Remover"} onClick={handleClickDelete}/>
     </div>
   );
 };
