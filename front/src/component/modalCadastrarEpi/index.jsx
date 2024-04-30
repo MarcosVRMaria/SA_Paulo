@@ -11,70 +11,71 @@ function ModalCadastro({ info }) {
     const handleShow = () => setShow(true);
 
     return (
-        <>
+        < div className="porra">
             <Button variant="primary" onClick={handleShow}>
                 {info.metodo}
             </Button>
-
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header >
-                    <Modal.Title>{info.titulo}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <InputTextDefault
-                        info={{
-                            id: info.idTipo,
-                            placeholder: info.placeholderTipo,
-                            func: info.funcTipo,
-                            value: info.valueTipo
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idMarca,
-                            placeholder: info.placeholderMarca,
-                            func: info.funcMarca,
-                            value: info.valueMarca
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idNome,
-                            placeholder: info.placeholderNome,
-                            func: info.funcNome,
-                            value: info.valueNome
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idCa,
-                            placeholder: info.placeholderCa,
-                            func: info.funcCa,
-                            value: info.valueCa
-                        }}
-                    />
-                    <InputTextDefault
-                        info={{
-                            id: info.idDatav,
-                            placeholder: info.placeholderDatav,
-                            func: info.funcDatav,
-                            value: info.valueDatav
-                        }}
-                    />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Fechar
-                    </Button>
-                    <Button variant="primary" onClick={info.cadastrar}>Cadastrar</Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+            <div className='tet'>
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header >
+                        <Modal.Title className='modal-title'>{info.titulo}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className='modal-body'>
+                        <InputTextDefault
+                            info={{
+                                id: info.idTipo,
+                                placeholder: info.placeholderTipo,
+                                func: info.funcTipo,
+                                value: info.valueTipo
+                            }}
+                        />
+                        <InputTextDefault
+                            info={{
+                                id: info.idMarca,
+                                placeholder: info.placeholderMarca,
+                                func: info.funcMarca,
+                                value: info.valueMarca
+                            }}
+                        />
+                        <InputTextDefault
+                            info={{
+                                id: info.idNome,
+                                placeholder: info.placeholderNome,
+                                func: info.funcNome,
+                                value: info.valueNome
+                            }}
+                        />
+                        <InputTextDefault
+                            info={{
+                                id: info.idCa,
+                                placeholder: info.placeholderCa,
+                                func: info.funcCa,
+                                value: info.valueCa
+                            }}
+                        />
+                        <InputTextDefault
+                            info={{
+                                id: info.idDatav,
+                                placeholder: info.placeholderDatav,
+                                func: info.funcDatav,
+                                value: info.valueDatav
+                            }}
+                        />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Fechar
+                        </Button>
+                        <Button variant="primary" onClick={info.cadastrar}>Cadastrar</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        </div>
     );
 }
 

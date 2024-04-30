@@ -7,6 +7,7 @@ import ModalCadastro from "../../component/modalCadastrarEpi/index.jsx"
 import ModalEditar from "../../component/modalEditarEpi/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
 import moment from "moment";
+import "./epi.css"
 
 
 const Epi = () => {
@@ -256,7 +257,8 @@ const Epi = () => {
 
 
     return (
-        <div>
+        <div className="content-epi">
+            <div className="screen-control">
             {tipo.length > 0 && (
                 <Dropdown
                     placeholder={"Tipo"}
@@ -383,9 +385,9 @@ const Epi = () => {
                 {filter.length > 0 &&
                     <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
             </div>
-            <button onClick={handleClickGet}>Pesquisa</button>
-            <button onClick={handleClickDelete}>Apagar</button>
-
+            <button className="bnt-pesquisar-epi" onClick={handleClickGet}>Pesquisa</button>
+            <button className="bnt-apagar-epi" onClick={handleClickDelete}>Apagar</button>
+            </div>
         </div>
 
     )

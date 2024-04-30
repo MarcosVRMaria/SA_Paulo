@@ -1,3 +1,4 @@
+import "./index.css"
 const InputTextDefault = ({ info }) => {
 
     return (
@@ -9,6 +10,7 @@ const InputTextDefault = ({ info }) => {
             placeholder={info.placeholder}
             onChange={(e) => info.func(e.target.value)}
             value={info.value}
+            className="input-text"
         />
     )
 }

@@ -11,22 +11,28 @@ import './index.css'
  * @param {Array} options - um argumento contendo todas as opões do dropdown
  */
 
- const Dropdown = ({selectedOption, setSelectOption,options,placeholder}) => {
+const Dropdown = ({ selectedOption, setSelectOption, options, placeholder }) => {
 
   const handleTypeSelect = (e) => {
     setSelectOption(e.value);
   };
-
+  // Estilos personalizados para o Select
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      borderRadius: '10px', // Ajuste conforme necessário
+    }),
+  };
   return (
     <div className="dropdown">
       <Select
-        placeholder={placeholder}
+        styles={customStyles} placeholder={placeholder}
         defaultValue={selectedOption}
         onChange={handleTypeSelect}
         options={options}
-        // value={options.filter(function (option) {
-        //   return option.value === selectedOption;
-        // })}
+      // value={options.filter(function (option) {
+      //   return option.value === selectedOption;
+      // })}
       />
     </div>
   );
