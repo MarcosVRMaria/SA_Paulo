@@ -26,6 +26,7 @@ const Emprestimos = () => {
     const [datarModalCadastro, setDatarModalCadastro] = useState("")
     const [datadModalCadastro, setDatadModalCadastro] = useState("")
     const [filter, setFilter] = useState([])
+    const [nomeDropdown, setNomeDropdown] = useState([])
 
 
     const navigate = useNavigate()
@@ -152,11 +153,19 @@ const Emprestimos = () => {
                         label: element.matricula,
                     };
                 });
+                const nomeData = objectsData2.map((element)=>{
+                    return {funcionario: element.nome}
+                })
+
 
                 // Chamando a função para remover itens duplicados
                 const funcionaioDataSemDuplicados = removerItensDuplicados(funcionaioData);
                 const matriculaDataSemDuplicados = removerItensDuplicados(matriculaData);
+                console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+ nomeData)
 
+                const nomeSemDuplicados = removerItensDuplicados(nomeData)
+
+                setNomeDropdown(nomeSemDuplicados)
                 setNome(funcionaioDataSemDuplicados);
                 setMatricula(matriculaDataSemDuplicados);
 
@@ -194,7 +203,6 @@ const Emprestimos = () => {
                         dated: dated,
                     });
                 });
-                console.log(objectsData)
                 setData(objectsData)
                 const epiEmprestimos = objectsData.map((element) => {
                     return ({
@@ -219,6 +227,10 @@ const Emprestimos = () => {
                         label: element.matricula,
                     };
                 });
+                const nomeData = objectsData.map((element)=>{
+                    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+element.nome)
+                    return {funcionario: element.nome}
+                })
 
                 // Chamando a função para remover itens duplicados
                 const matriculaDataSemDuplicados2 = removerItensDuplicados(matriculaData2);
@@ -279,14 +291,7 @@ const Emprestimos = () => {
     }
     return (
         <div>
-            {epiFinalizar.length > 0 && (
-                <Dropdown
-                    placeholder={"EPI"}
-                    selectedOption={epi}
-                    setSelectOption={setEpi}
-                    options={epiFinalizar}
-                />)
-            }
+
 
             {matriculasEmprestimos.length > 0 && (
                 <Dropdown
@@ -294,6 +299,22 @@ const Emprestimos = () => {
                     selectedOption={matricula}
                     setSelectOption={setMatricula}
                     options={matriculasEmprestimos}
+                />)
+            }
+            {nomeDropdown.length > 0 && (
+                <Dropdown
+                    placeholder={"Funcionário"}
+                    selectedOption={nome}
+                    setSelectOption={setNome}
+                    options={nomeDropdown}
+                />)
+            }
+            {epiFinalizar.length > 0 && (
+                <Dropdown
+                    placeholder={"EPI"}
+                    selectedOption={epi}
+                    setSelectOption={setEpi}
+                    options={epiFinalizar}
                 />)
             }
 
