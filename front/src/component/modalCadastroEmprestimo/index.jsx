@@ -28,19 +28,19 @@ function ModalCadastro({ info }) {
                 <Modal.Body>
 
                     <Dropdown
-                        placeholder={"EPI"}
+                        placeholder="EPI"
                         selectedOption={info.epiSelect}
                         setSelectOption={info.setEpiSelect}
                         options={info.epi}
                     />
                     <Dropdown
-                        placeholder={"Nome do funcionário"}
+                        placeholder="Nome do funcionário"
                         selectedOption={info.nomeSelect}
                         setSelectOption={info.setNomeSelect}
                         options={info.nome}
                     />
                     <Dropdown
-                        placeholder={"Matricula"}
+                        placeholder="Matricula"
                         selectedOption={info.matriculaSelect}
                         setSelectOption={info.setMatriculaSelect}
                         options={info.matricula}

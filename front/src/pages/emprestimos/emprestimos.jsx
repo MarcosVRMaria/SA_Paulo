@@ -9,11 +9,8 @@ import ModalCadastro from "../../component/modalCadastroEmprestimo/index.jsx";
 import ModalFinalizar from "../../component/modalDevolucaoEmprestimo/index.jsx";
 
 const Emprestimos = () => {
-    const [tipo, setTipo] = useState("")
-    const [marca, setMarca] = useState("")
     const [nome, setNome] = useState("")
     const [epi, setEpi] = useState("")
-    const [ca, setCa] = useState("")
     const [datad, setDatad] = useState("")
     const [datar, setDatar] = useState("")
     const [matricula, setMatricula] = useState("")
@@ -29,10 +26,6 @@ const Emprestimos = () => {
     const [datarModalCadastro, setDatarModalCadastro] = useState("")
     const [datadModalCadastro, setDatadModalCadastro] = useState("")
     const [filter, setFilter] = useState([])
-    const [select, setSelect] = useState("")
-    const [tipoSelect, setTipoSelect] = useState("")
-    const [marcaSelect, setMarcaSelect] = useState("")
-    const [funcionaio, setFuncionaio] = useState("")
 
 
     const navigate = useNavigate()
@@ -201,7 +194,7 @@ const Emprestimos = () => {
                         dated: dated,
                     });
                 });
-                // console.log(objectsData)
+                console.log(objectsData)
                 setData(objectsData)
                 const epiEmprestimos = objectsData.map((element) => {
                     return ({
@@ -229,7 +222,8 @@ const Emprestimos = () => {
 
                 // Chamando a função para remover itens duplicados
                 const matriculaDataSemDuplicados2 = removerItensDuplicados(matriculaData2);
-                setEpiFinalizar(epiData)
+                const epiDataSemDuplicados2 = removerItensDuplicados(epiData)
+                setEpiFinalizar(epiDataSemDuplicados2)
                 setMatriculasEmprestimos(matriculaDataSemDuplicados2);
 
             })
@@ -285,30 +279,24 @@ const Emprestimos = () => {
     }
     return (
         <div>
-            <InputTextDefault
-                info={{
-                    id: "nome",
-                    placeholder: "Funcionario",
-                    func: setNome,
-                    value: nome
-                }}
-            />
-            <InputTextDefault
-                info={{
-                    id: "matricula",
-                    placeholder: "Matricula",
-                    func: setMatricula,
-                    value: matricula
-                }}
-            />
-            <InputTextDefault
-                info={{
-                    id: "epi",
-                    placeholder: "EPI",
-                    func: setEpi,
-                    value: epi
-                }}
-            />
+            {epiFinalizar.length > 0 && (
+                <Dropdown
+                    placeholder={"EPI"}
+                    selectedOption={epi}
+                    setSelectOption={setEpi}
+                    options={epiFinalizar}
+                />)
+            }
+
+            {matriculasEmprestimos.length > 0 && (
+                <Dropdown
+                    placeholder={"Matricula"}
+                    selectedOption={matricula}
+                    setSelectOption={setMatricula}
+                    options={matriculasEmprestimos}
+                />)
+            }
+
             <InputTextDefault
                 info={{
                     id: "dataRetirada",
