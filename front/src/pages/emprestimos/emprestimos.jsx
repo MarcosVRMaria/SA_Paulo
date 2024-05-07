@@ -17,7 +17,6 @@ const Emprestimos = () => {
     const [matriculasEmprestimos, setMatriculasEmprestimos] = useState("")
     const [epiFinalizar, setEpiFinalizar] = useState("")
     const [data, setData] = useState([])
-    const [data2, setData2] = useState([])
     const [nomeModalCadastro, setNomeModalCadastro] = useState("")
     const [matriculaModalCadastro, setMatriculaModalCadastro] = useState("")
     const [matriculaModalFinalizar, setMatriculaModalFinalizar] = useState("")
@@ -26,7 +25,8 @@ const Emprestimos = () => {
     const [datarModalCadastro, setDatarModalCadastro] = useState("")
     const [datadModalCadastro, setDatadModalCadastro] = useState("")
     const [filter, setFilter] = useState([])
-
+    const [epiSelect, setEpiSelect] = useState("")
+    const [matriculaSelect, setMatriculaSelect] = useState("")
 
     const navigate = useNavigate()
 
@@ -196,24 +196,14 @@ const Emprestimos = () => {
                 });
                 console.log(objectsData)
                 setData(objectsData)
-                const epiEmprestimos = objectsData.map((element) => {
-                    return ({
-                        epi: element.epi
-                    })
-                })
-                const epiData = epiEmprestimos.map((element) => {
+                const epiData = objectsData.map((element) => {
                     return ({
                         value: element.epi,
                         label: element.epi
                     })
                 })
-                const matriculaEmprestimos = objectsData.map((element) => {
-                    return ({
-                        matricula: element.matricula
-                    })
-                })
 
-                const matriculaData2 = matriculaEmprestimos.map((element) => {
+                const matriculaData2 = objectsData.map((element) => {
                     return {
                         value: element.matricula,
                         label: element.matricula,
@@ -233,7 +223,7 @@ const Emprestimos = () => {
     })
 
     const handleClickGet = async () => {
-        let filtro = data.filter((x) => x.nome == nome || x.matricula == matricula || x.epi == epi || x.dater == datar || x.dated == datad)
+        let filtro = data.filter((x) => x.nome == nome || x.matricula == matriculaSelect || x.epi == epiSelect || x.dater == datar || x.dated == datad)
         setFilter(filtro)
         console.log(data)
     };
@@ -254,7 +244,7 @@ const Emprestimos = () => {
             nomeFuncionario: nomeModalCadastro,
             epi: epiModalCadastro,
             dataRetirada: dater2,
-            dataDevolucao: dated2
+            dataDevolucao: dated2,
         });
 
         let config = {
@@ -277,13 +267,14 @@ const Emprestimos = () => {
         getAllData()
 
     }
+
     return (
         <div>
             {epiFinalizar.length > 0 && (
                 <Dropdown
                     placeholder={"EPI"}
-                    selectedOption={epi}
-                    setSelectOption={setEpi}
+                    selectedOption={epiSelect}
+                    setSelectOption={setEpiSelect}
                     options={epiFinalizar}
                 />)
             }
@@ -291,8 +282,8 @@ const Emprestimos = () => {
             {matriculasEmprestimos.length > 0 && (
                 <Dropdown
                     placeholder={"Matricula"}
-                    selectedOption={matricula}
-                    setSelectOption={setMatricula}
+                    selectedOption={matriculaSelect}
+                    setSelectOption={setMatriculaSelect}
                     options={matriculasEmprestimos}
                 />)
             }
