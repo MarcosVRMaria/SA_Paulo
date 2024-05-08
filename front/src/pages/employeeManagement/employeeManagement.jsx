@@ -2,6 +2,7 @@ import BigButton from "../../component/bigButton/index";
 import InputTextDefault from "../../component/inputTextDefault/index";
 import { useState, useEffect } from "react";
 import Dropdown from "../../component/dropdown";
+import { useNavigate,Link } from "react-router-dom"
 import Table from "../../component/table";
 import SearchButton from "../../component/searchbutton";
 import ModalCadastroFuncionario from "../../component/modalCadastroFuncionario";
@@ -124,63 +125,63 @@ const EmployeeManagement = () => {
     filtro();
   };
   const handleClickPut = async () => {
-    
+
     if (tableChoice.length > 1 || tableChoice.length == 0) {
-        return alert("Selecione apenas um para editar.")
+      return alert("Selecione apenas um para editar.")
     }
 
 
     let data = JSON.stringify({
-        setor: setorModalEditar,
-        nome: nomeModalEditar,
-        matricula: matriculaModalEditar,
-        homogenio: grupoModalEditar,
+      setor: setorModalEditar,
+      nome: nomeModalEditar,
+      matricula: matriculaModalEditar,
+      homogenio: grupoModalEditar,
     });
     console.log(data)
 
     let config = {
-        method: 'put',
-        url: `http://localhost:3000/editarFuncionario/${matriculaModalEditar}`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: data
+      method: 'put',
+      url: `http://localhost:3000/editarFuncionario/${matriculaModalEditar}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data
     }
 
     axios.request(config)
-        .then((response) => {
-            console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     alert("Edição realizada com sucesso")
     getAllData()
-}
+  }
 
-const handleClickDelete = async () => {
-  const objectsData = tableChoice.map((element) => {
+  const handleClickDelete = async () => {
+    const objectsData = tableChoice.map((element) => {
       return (element.matricula);
-  });
-  console.log(objectsData)
-  let config = {
+    });
+    console.log(objectsData)
+    let config = {
       method: 'delete',
       url: `http://localhost:3000/deleteFuncionario/${objectsData}`,
       headers: {
-          'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       },
-  }
+    }
 
-  axios.request(config)
+    axios.request(config)
       .then((response) => {
-          console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data));
       })
       .catch((error) => {
-          console.log(error);
+        console.log(error);
       });
-  alert("Remoção realizada com sucesso")
-  getAllData()
-}
+    alert("Remoção realizada com sucesso")
+    getAllData()
+  }
 
   // Função para remover itens duplicados do array de objetos
   const removerItensDuplicados = (array) => {
@@ -311,38 +312,40 @@ const handleClickDelete = async () => {
           cadastrar: handleClickPost
 
         }} />
-        <ModalEditarFuncionario 
-          info={{
-            select: tableChoice,
+      <ModalEditarFuncionario
+        info={{
+          select: tableChoice,
 
-            metodo: "Editar",
-            titulo: "Editar",
+          metodo: "Editar",
+          titulo: "Editar",
 
-            idSetor: "setorModalEditar",
-            placeholderSetor: "Setor",
-            funcSetor: setSetorModalEditar,
-            valueSetor: setorModalEditar,
+          idSetor: "setorModalEditar",
+          placeholderSetor: "Setor",
+          funcSetor: setSetorModalEditar,
+          valueSetor: setorModalEditar,
 
-            idGrupo: "grupoModalEditar",
-            placeholderGrupo: "Grupo Homogeneo",
-            funcGrupo: setGrupoModalEditar,
-            valueGrupo: grupoModalEditar,
+          idGrupo: "grupoModalEditar",
+          placeholderGrupo: "Grupo Homogeneo",
+          funcGrupo: setGrupoModalEditar,
+          valueGrupo: grupoModalEditar,
 
-            idNome: "nomeModalEditar",
-            placeholderNome: "Nome",
-            funcNome: setNomeModalEditar,
-            valueNome: nomeModalEditar,
+          idNome: "nomeModalEditar",
+          placeholderNome: "Nome",
+          funcNome: setNomeModalEditar,
+          valueNome: nomeModalEditar,
 
-            idMatricula: "matriculaModalEditar",
-            placeholderMatricula: "Matrícula",
-            funcMatricula: setMatriculaModalEditar,
-            valueMatricula: matriculaModalEditar,
+          idMatricula: "matriculaModalEditar",
+          placeholderMatricula: "Matrícula",
+          funcMatricula: setMatriculaModalEditar,
+          valueMatricula: matriculaModalEditar,
 
-            editar: handleClickPut
+          editar: handleClickPut
 
-        }}/>
-      <BigButton text={"Remover"}  onClick={handleClickDelete}/>
-      </div>
+        }} />
+      <BigButton text={"Remover"} onClick={handleClickDelete} />
+      <Link to={"/home"}>
+        <button>Voltar</button>
+      </Link>
     </div>
   );
 };

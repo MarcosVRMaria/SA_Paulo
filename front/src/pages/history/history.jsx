@@ -4,7 +4,7 @@ import axios from "axios";
 import moment from "moment";
 import InputTextDefault from "../../component/inputTextDefault/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 
 const Historico = () => {
@@ -19,8 +19,6 @@ const Historico = () => {
     const [data, setData] = useState([])
     const [filter, setFilter] = useState([])
 
-
-    const navigate = useNavigate()
 
     const columns = [
         {
@@ -260,6 +258,9 @@ const Historico = () => {
                     <Table columns={columns} data={filter} />}
             </div>
             <button onClick={handleClickGet}>Pesquisa</button>
+            <Link to={"/home"}>
+                <button>Voltar</button>
+            </Link>
         </div>
     )
 }
