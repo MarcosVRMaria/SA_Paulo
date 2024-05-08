@@ -91,18 +91,19 @@ const Emprestimos = () => {
         }
         rendered.current = true
     }, [nomeSelect])
-    useEffect(() => {
-        if (rendered.current) {
-            linkNomeCadastro()
-        }
-        rendered.current = true
-    }, [nomeModalCadastro])
-    useEffect(() => {
-        if (rendered.current) {
-            linkMatriculaCadastro()
-        }
-        rendered.current = true
-    }, [matriculaModalCadastro])
+
+    // useEffect(() => {
+    //     if (rendered.current) {
+    //         linkNomeCadastro()
+    //     }
+    //     rendered.current = true
+    // }, [nomeModalCadastro])
+    // useEffect(() => {
+    //     if (rendered.current) {
+    //         linkMatriculaCadastro()
+    //     }
+    //     rendered.current = true
+    // }, [matriculaModalCadastro])
 
 
     // Função para remover itens duplicados do array de objetos
@@ -209,7 +210,7 @@ const Emprestimos = () => {
         setNomeDropdown(noDups)
     }
 
-    const linkNome = () =>{
+    const linkNome = () => {
 
         let filtro = data.filter((x) => x.nome == nomeSelect)
         console.log(filtro)
@@ -237,7 +238,7 @@ const Emprestimos = () => {
         setMatriculaModalCadastro(noDups)
     }
 
-    const linkNomeCadastro = () =>{
+    const linkNomeCadastro = () => {
 
         let filtro = data.filter((x) => x.nome == nomeModalCadastro)
         console.log(filtro)
