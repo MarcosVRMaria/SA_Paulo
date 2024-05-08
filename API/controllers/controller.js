@@ -121,7 +121,7 @@ const postFuncionario = async (req, res) => {
 
 const postEmprestimo = async (req, res) => {
     try {
-        const { nomeFuncionario, matricula, epi, dataRetirada, dataDevolucao} = req.body
+        const { nomeFuncionario, matricula, epi, dataRetirada, dataDevolucao } = req.body
         if (!nomeFuncionario || !matricula || !epi || !dataRetirada || !dataDevolucao) return res.status(404).send({ mensagem: 'Campos incompletos' })
         const emprestimoCriado = await tabelas.Emprestimos.create({ nomeFuncionario, matricula, epi, dataRetirada, dataDevolucao })
         res.status(201).send({ emprestimoCriado })
@@ -220,11 +220,12 @@ const putAtualizarFuncionario = async (req, res) => {
 
 const putAtualizarEmprestimos = async (req, res) => {
     try {
-        const id = req.params.id
+        const { epi, matricula } = req.params
         const info = req.body
         const emprestimoAtualizado = await tabelas.Emprestimos.update(info, {
             where: {
-                id: id
+                epi: epi,
+                matricula: matricula
             }
         })
         res.status(201).send({ emprestimoAtualizado })

@@ -153,15 +153,15 @@ const Emprestimos = () => {
                         label: element.matricula,
                     };
                 });
-                const nomeData = objectsData2.map((element)=>{
-                    return {funcionario: element.nome}
+                const nomeData = objectsData2.map((element) => {
+                    return { funcionario: element.nome }
                 })
 
 
                 // Chamando a função para remover itens duplicados
                 const funcionaioDataSemDuplicados = removerItensDuplicados(funcionaioData);
                 const matriculaDataSemDuplicados = removerItensDuplicados(matriculaData);
-                console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+ nomeData)
+                console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + nomeData)
 
                 const nomeSemDuplicados = removerItensDuplicados(nomeData)
 
@@ -217,9 +217,9 @@ const Emprestimos = () => {
                         label: element.matricula,
                     };
                 });
-                const nomeData = objectsData.map((element)=>{
-                    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+element.nome)
-                    return {funcionario: element.nome}
+                const nomeData = objectsData.map((element) => {
+                    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + element.nome)
+                    return { funcionario: element.nome }
                 })
 
                 // Chamando a função para remover itens duplicados
@@ -279,10 +279,34 @@ const Emprestimos = () => {
         getAllData()
 
     }
+    const handleClickDelete = async () => {
 
+        let data = JSON.stringify({
+            delete: true
+        });
+        console.log(data)
+
+        let config = {
+            method: 'put',
+            url: `http://localhost:3000/deleteEmprestimo/${matriculaModalFinalizar}/${epiModalFinalizar}`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: data
+        }
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        alert("Edição realizada com sucesso")
+        getAllData()
+    }
     return (
         <div>
-          
+
 
             {matriculasEmprestimos.length > 0 && (
                 <Dropdown
@@ -300,7 +324,7 @@ const Emprestimos = () => {
                     options={nomeDropdown}
                 />)
             }
-             {epiFinalizar.length > 0 && (
+            {epiFinalizar.length > 0 && (
                 <Dropdown
                     placeholder={"EPI"}
                     selectedOption={epiSelect}
@@ -367,9 +391,10 @@ const Emprestimos = () => {
                     matricula: matriculasEmprestimos,
 
                     emprestimoSelect: epiModalFinalizar,
-                    setEmprestimosSelect: setEpiModalFinalizar,
-                    emprestimo: epiFinalizar
+                    setEmprestimoSelect: setEpiModalFinalizar,
+                    emprestimo: epiFinalizar,
 
+                    ok: handleClickDelete
                 }}
             />
             <div style={{
