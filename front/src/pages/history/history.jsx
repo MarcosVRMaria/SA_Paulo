@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import Table from "../../component/table/index.jsx";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
+import moment from "moment";
 import InputTextDefault from "../../component/inputTextDefault/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
-import moment from "moment";
-import ModalCadastro from "../../component/modalCadastroEmprestimo/index.jsx";
-import ModalFinalizar from "../../component/modalDevolucaoEmprestimo/index.jsx";
+import { useNavigate } from "react-router-dom"
 
-const Emprestimos = () => {
+
+const Historico = () => {
+
     const [nome, setNome] = useState("")
     const [epi, setEpi] = useState("")
     const [datad, setDatad] = useState("")
@@ -17,17 +17,8 @@ const Emprestimos = () => {
     const [matriculasEmprestimos, setMatriculasEmprestimos] = useState("")
     const [epiFinalizar, setEpiFinalizar] = useState("")
     const [data, setData] = useState([])
-    const [nomeModalCadastro, setNomeModalCadastro] = useState("")
-    const [matriculaModalCadastro, setMatriculaModalCadastro] = useState("")
-    const [matriculaModalFinalizar, setMatriculaModalFinalizar] = useState("")
-    const [epiModalFinalizar, setEpiModalFinalizar] = useState("")
-    const [epiModalCadastro, setEpiModalCadastro] = useState("")
-    const [datarModalCadastro, setDatarModalCadastro] = useState("")
-    const [datadModalCadastro, setDatadModalCadastro] = useState("")
     const [filter, setFilter] = useState([])
-    const [epiSelect, setEpiSelect] = useState("")
-    const [matriculaSelect, setMatriculaSelect] = useState("")
-    const [nomeDropdown, setNomeDropdown] = useState([])
+
 
     const navigate = useNavigate()
 
@@ -57,14 +48,6 @@ const Emprestimos = () => {
             width: "200px",
         },
         {
-            name: "Data de retirada",
-            selector: (row) => row.dater,
-            sortable: true,
-            filter: true,
-            width: "200px"                       // added line here
-
-        },
-        {
             name: "Data de devolução",
             selector: (row) => row.dated,
             sortable: true,
@@ -78,7 +61,6 @@ const Emprestimos = () => {
         getAllTables()
     }, [])
 
-    // Função para remover itens duplicados do array de objetos
     const removerItensDuplicados = (array) => {
         // Use um conjunto para manter apenas os objetos únicos
         const conjunto = new Set();
@@ -93,7 +75,6 @@ const Emprestimos = () => {
             return false;
         });
     }
-
 
     const getAllTables = (() => {
         let config = {
@@ -153,19 +134,11 @@ const Emprestimos = () => {
                         label: element.matricula,
                     };
                 });
-                const nomeData = objectsData2.map((element) => {
-                    return { funcionario: element.nome }
-                })
-
 
                 // Chamando a função para remover itens duplicados
                 const funcionaioDataSemDuplicados = removerItensDuplicados(funcionaioData);
                 const matriculaDataSemDuplicados = removerItensDuplicados(matriculaData);
-                console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + nomeData)
 
-                const nomeSemDuplicados = removerItensDuplicados(nomeData)
-
-                setNomeDropdown(nomeSemDuplicados)
                 setNome(funcionaioDataSemDuplicados);
                 setMatricula(matriculaDataSemDuplicados);
 
@@ -201,26 +174,35 @@ const Emprestimos = () => {
                         epi: element.epi,
                         dater: dater,
                         dated: dated,
+                        delete: element.delete
                     });
                 });
-                setData(objectsData)
-                const epiData = objectsData.map((element) => {
+                console.log(objectsData)
+                let filtro = objectsData.filter((x) => x.delete == true)
+                setData(filtro)
+                const epiEmprestimos = objectsData.map((element) => {
+                    return ({
+                        epi: element.epi
+                    })
+                })
+                const epiData = epiEmprestimos.map((element) => {
                     return ({
                         value: element.epi,
                         label: element.epi
                     })
                 })
+                const matriculaEmprestimos = objectsData.map((element) => {
+                    return ({
+                        matricula: element.matricula
+                    })
+                })
 
-                const matriculaData2 = objectsData.map((element) => {
+                const matriculaData2 = matriculaEmprestimos.map((element) => {
                     return {
                         value: element.matricula,
                         label: element.matricula,
                     };
                 });
-                const nomeData = objectsData.map((element) => {
-                    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + element.nome)
-                    return { funcionario: element.nome }
-                })
 
                 // Chamando a função para remover itens duplicados
                 const matriculaDataSemDuplicados2 = removerItensDuplicados(matriculaData2);
@@ -233,168 +215,37 @@ const Emprestimos = () => {
                 console.log(error);
             });
     })
-
     const handleClickGet = async () => {
-        let filtro = data.filter((x) => x.nome == nome || x.matricula == matriculaSelect || x.epi == epiSelect || x.dater == datar || x.dated == datad)
+        let filtro = data.filter((x) => x.nome == nome || x.matricula == matricula || x.epi == epi || x.dater == datar || x.dated == datad)
         setFilter(filtro)
         console.log(data)
     };
 
-    const handleClickPost = async () => {
-        getAllTables()
-
-        let x = datadModalCadastro.split("/")
-        let dated = x[2] + "-" + x[1] + "-" + x[0]
-        let dated2 = dated + "T00:00:00.000Z"
-
-        let y = datarModalCadastro.split("/")
-        let dater = y[2] + "-" + y[1] + "-" + y[0]
-        let dater2 = dater + "T00:00:00.000Z"
-
-        let datacadastro = JSON.stringify({
-            matricula: matriculaModalCadastro,
-            nomeFuncionario: nomeModalCadastro,
-            epi: epiModalCadastro,
-            dataRetirada: dater2,
-            dataDevolucao: dated2,
-        });
-
-        let config = {
-            method: 'post',
-            url: `http://localhost:3000/cadastrarEmprestimo`,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            data: datacadastro
-        }
-
-        axios.request(config)
-            .then((response) => {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        alert("Cadastro realizado com sucesso")
-        getAllData()
-
-    }
-    const handleClickDelete = async () => {
-
-        let data = JSON.stringify({
-            delete: true
-        });
-        console.log(data)
-
-        let config = {
-            method: 'put',
-            url: `http://localhost:3000/deleteEmprestimo/${matriculaModalFinalizar}/${epiModalFinalizar}`,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            data: data
-        }
-        axios.request(config)
-            .then((response) => {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        alert("Edição realizada com sucesso")
-        getAllData()
-    }
     return (
         <div>
-
-
-            {matriculasEmprestimos.length > 0 && (
-                <Dropdown
-                    placeholder={"Matricula"}
-                    selectedOption={matriculaSelect}
-                    setSelectOption={setMatriculaSelect}
-                    options={matriculasEmprestimos}
-                />)
-            }
-            {nomeDropdown.length > 0 && (
-                <Dropdown
-                    placeholder={"Funcionário"}
-                    selectedOption={nome}
-                    setSelectOption={setNome}
-                    options={nomeDropdown}
-                />)
-            }
             {epiFinalizar.length > 0 && (
                 <Dropdown
                     placeholder={"EPI"}
-                    selectedOption={epiSelect}
-                    setSelectOption={setEpiSelect}
+                    selectedOption={epi}
+                    setSelectOption={setEpi}
                     options={epiFinalizar}
                 />)
             }
 
-            <InputTextDefault
-                info={{
-                    id: "dataRetirada",
-                    placeholder: "Data de Retirada",
-                    func: setDatar,
-                    value: datar
-                }}
-            />
+            {matriculasEmprestimos.length > 0 && (
+                <Dropdown
+                    placeholder={"Matricula"}
+                    selectedOption={matricula}
+                    setSelectOption={setMatricula}
+                    options={matriculasEmprestimos}
+                />)
+            }
             <InputTextDefault
                 info={{
                     id: "dataDevolucao",
                     placeholder: "Data de devolução",
                     func: setDatad,
                     value: datad
-                }}
-            />
-            <ModalCadastro
-                info={{
-                    metodo: "Cadastrar",
-                    titulo: "Cadastro",
-
-                    epiSelect: epiModalCadastro,
-                    setEpiSelect: setEpiModalCadastro,
-                    epi: epi,
-
-                    nomeSelect: nomeModalCadastro,
-                    setNomeSelect: setNomeModalCadastro,
-                    nome: nome,
-
-                    matriculaSelect: matriculaModalCadastro,
-                    setMatriculaSelect: setMatriculaModalCadastro,
-                    matricula: matricula,
-
-                    idDatar: "dataRetirada",
-                    placeholderDatar: "Data de Retirada",
-                    funcDatar: setDatarModalCadastro,
-                    valueDatar: datarModalCadastro,
-
-                    idDatad: "dataDevolucao",
-                    placeholderDatad: "Data maximo para Devolução",
-                    funcDatad: setDatadModalCadastro,
-                    valueDatad: datadModalCadastro,
-
-
-                    cadastrar: handleClickPost
-
-                }}
-            />
-            <ModalFinalizar
-                info={{
-                    metodo: "Finalizar Empréstimo",
-                    titulo: "Finalização de Empréstimos",
-
-                    matriculaSelect: matriculaModalFinalizar,
-                    setMatriculaSelect: setMatriculaModalFinalizar,
-                    matricula: matriculasEmprestimos,
-
-                    emprestimoSelect: epiModalFinalizar,
-                    setEmprestimoSelect: setEpiModalFinalizar,
-                    emprestimo: epiFinalizar,
-
-                    ok: handleClickDelete
                 }}
             />
             <div style={{
@@ -413,4 +264,4 @@ const Emprestimos = () => {
     )
 }
 
-export default Emprestimos
+export default Historico

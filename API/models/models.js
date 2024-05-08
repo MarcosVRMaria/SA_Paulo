@@ -93,7 +93,11 @@ const Emprestimos = sequelize.define('Emprestimo', {
     },
     dataDevolucao: {
         type: DataTypes.DATE
+    },
+    delete: {
+        type: DataTypes.BOOLEAN
     }
+
 },
     {
         updatedAt: false,

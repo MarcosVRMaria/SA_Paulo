@@ -8,6 +8,7 @@ import Home from './pages/home/home.jsx';
 import Epi from './pages/epi/epi.jsx';
 import EmployeeManagement from './pages/employeeManagement/employeeManagement.jsx';
 import Emprestimos from './pages/emprestimos/emprestimos.jsx';
+import Historico from './pages/history/history.jsx';
 
 const paginas = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const paginas = createBrowserRouter([
   {
     path: "/emprestimos",
     element: <Emprestimos />
+  },
+  {
+    path: "/historico",
+    element: <Historico />
   }
 ])
 
