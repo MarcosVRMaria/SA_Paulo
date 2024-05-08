@@ -275,7 +275,6 @@ const Epi = () => {
                     />)
                 }
 
-
                 <InputTextDefault
                     info={{
                         id: "nome",

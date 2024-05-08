@@ -92,6 +92,20 @@ const Emprestimos = () => {
         rendered.current = true
     }, [nomeSelect])
 
+    // useEffect(() => {
+    //     if (rendered.current) {
+    //         linkNomeCadastro()
+    //     }
+    //     rendered.current = true
+    // }, [nomeModalCadastro])
+    // useEffect(() => {
+    //     if (rendered.current) {
+    //         linkMatriculaCadastro()
+    //     }
+    //     rendered.current = true
+    // }, [matriculaModalCadastro])
+
+
     // Função para remover itens duplicados do array de objetos
     const removerItensDuplicados = (array) => {
         // Use um conjunto para manter apenas os objetos únicos
@@ -196,9 +210,10 @@ const Emprestimos = () => {
         setNomeDropdown(noDups)
     }
 
-    const linkNome = () =>{
+    const linkNome = () => {
 
         let filtro = data.filter((x) => x.nome == nomeSelect)
+        console.log(filtro)
         const objectsData = filtro.map((element) => {
             return {
                 value: element.matricula,
@@ -208,6 +223,34 @@ const Emprestimos = () => {
         console.log(objectsData)
         let noDups = removerItensDuplicados(objectsData)
         setMatriculasEmprestimos(noDups)
+    }
+
+    const linkMatriculaCadastro = () => {
+        let filtro = data.filter((x) => x.matricula == matriculaModalCadastro)
+        const objectsData = filtro.map((element) => {
+            return {
+                value: element.nome,
+                label: element.nome
+            };
+        });
+        console.log(objectsData)
+        let noDups = removerItensDuplicados(objectsData)
+        setMatriculaModalCadastro(noDups)
+    }
+
+    const linkNomeCadastro = () => {
+
+        let filtro = data.filter((x) => x.nome == nomeModalCadastro)
+        console.log(filtro)
+        const objectsData = filtro.map((element) => {
+            return {
+                value: element.matricula,
+                label: element.matricula
+            };
+        });
+        console.log(objectsData)
+        let noDups = removerItensDuplicados(objectsData)
+        setNomeModalCadastro(noDups)
     }
 
     const getAllData = (() => {
@@ -240,20 +283,20 @@ const Emprestimos = () => {
                 });
                 let filtro = objectsData.filter((x) => x.delete == null)
                 setData(filtro)
-                const epiData = objectsData.map((element) => {
+                const epiData = filtro.map((element) => {
                     return ({
                         value: element.epi,
                         label: element.epi
                     })
                 })
 
-                const matriculaData2 = objectsData.map((element) => {
+                const matriculaData2 = filtro.map((element) => {
                     return {
                         value: element.matricula,
                         label: element.matricula,
                     };
                 });
-                const nomeData = objectsData.map((element) => {
+                const nomeData = filtro.map((element) => {
                     return {
                         value: element.nome,
                         label: element.nome

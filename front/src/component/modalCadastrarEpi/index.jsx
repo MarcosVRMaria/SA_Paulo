@@ -11,7 +11,7 @@ function ModalCadastro({ info }) {
     const handleShow = () => setShow(true);
 
     return (
-        < div className="porra">
+        < div>
             <Button variant="primary" onClick={handleShow}>
                 {info.metodo}
             </Button>

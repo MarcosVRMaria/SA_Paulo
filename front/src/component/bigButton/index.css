@@ -1,4 +1,11 @@
-.button {border-radius: 8px;
-    background-color: #025799;
-    color: white;
+.button {
+    background-color: var(--main-color);
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 18px;
+    color: #ffff;
+    margin-top: 10px;
+    margin-left: 10px;
 }
