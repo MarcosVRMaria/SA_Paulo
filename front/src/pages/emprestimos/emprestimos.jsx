@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Table from "../../component/table/index.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
@@ -26,10 +26,11 @@ const Emprestimos = () => {
     const [datadModalCadastro, setDatadModalCadastro] = useState("")
     const [filter, setFilter] = useState([])
     const [epiSelect, setEpiSelect] = useState("")
+    const [nomeSelect, setNomeSelect] = useState("")
     const [matriculaSelect, setMatriculaSelect] = useState("")
+    const rendered = useRef(false)
     const [nomeDropdown, setNomeDropdown] = useState([])
 
-    const navigate = useNavigate()
 
     const columns = [
         {
@@ -77,6 +78,19 @@ const Emprestimos = () => {
         getAllData()
         getAllTables()
     }, [])
+
+    useEffect(() => {
+        if (rendered.current) {
+            linkMatricula()
+        }
+        rendered.current = true
+    }, [matriculaSelect])
+    useEffect(() => {
+        if (rendered.current) {
+            linkNome()
+        }
+        rendered.current = true
+    }, [nomeSelect])
 
     // Função para remover itens duplicados do array de objetos
     const removerItensDuplicados = (array) => {
@@ -153,19 +167,13 @@ const Emprestimos = () => {
                         label: element.matricula,
                     };
                 });
-                const nomeData = objectsData2.map((element)=>{
-                    return {funcionario: element.nome}
-                })
+
 
 
                 // Chamando a função para remover itens duplicados
                 const funcionaioDataSemDuplicados = removerItensDuplicados(funcionaioData);
                 const matriculaDataSemDuplicados = removerItensDuplicados(matriculaData);
-                console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+ nomeData)
 
-                const nomeSemDuplicados = removerItensDuplicados(nomeData)
-
-                setNomeDropdown(nomeSemDuplicados)
                 setNome(funcionaioDataSemDuplicados);
                 setMatricula(matriculaDataSemDuplicados);
 
@@ -175,6 +183,33 @@ const Emprestimos = () => {
             });
 
     })
+
+    const linkMatricula = () => {
+        let filtro = data.filter((x) => x.matricula == matriculaSelect)
+        const objectsData = filtro.map((element) => {
+            return {
+                value: element.nome,
+                label: element.nome
+            };
+        });
+        console.log(objectsData)
+        let noDups = removerItensDuplicados(objectsData)
+        setNomeDropdown(noDups)
+    }
+
+    const linkNome = () =>{
+
+        let filtro = data.filter((x) => x.nome == nomeSelect)
+        const objectsData = filtro.map((element) => {
+            return {
+                value: element.matricula,
+                label: element.matricula
+            };
+        });
+        console.log(objectsData)
+        let noDups = removerItensDuplicados(objectsData)
+        setMatriculasEmprestimos(noDups)
+    }
 
     const getAllData = (() => {
         let config = {
@@ -217,14 +252,18 @@ const Emprestimos = () => {
                         label: element.matricula,
                     };
                 });
-                const nomeData = objectsData.map((element)=>{
-                    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"+element.nome)
-                    return {funcionario: element.nome}
+                const nomeData = objectsData.map((element) => {
+                    return {
+                        value: element.nome,
+                        label: element.nome
+                    }
                 })
-
                 // Chamando a função para remover itens duplicados
                 const matriculaDataSemDuplicados2 = removerItensDuplicados(matriculaData2);
                 const epiDataSemDuplicados2 = removerItensDuplicados(epiData)
+                const nomeSemDuplicados = removerItensDuplicados(nomeData)
+                setNomeDropdown(nomeSemDuplicados)
+
                 setEpiFinalizar(epiDataSemDuplicados2)
                 setMatriculasEmprestimos(matriculaDataSemDuplicados2);
 
@@ -234,8 +273,9 @@ const Emprestimos = () => {
             });
     })
 
+
     const handleClickGet = async () => {
-        let filtro = data.filter((x) => x.nome == nome || x.matricula == matriculaSelect || x.epi == epiSelect || x.dater == datar || x.dated == datad)
+        let filtro = data.filter((x) => x.nome == nomeSelect || x.matricula == matriculaSelect || x.epi == epiSelect || x.dater == datar || x.dated == datad)
         setFilter(filtro)
         console.log(data)
     };
@@ -282,7 +322,7 @@ const Emprestimos = () => {
 
     return (
         <div>
-          
+
 
             {matriculasEmprestimos.length > 0 && (
                 <Dropdown
@@ -295,12 +335,12 @@ const Emprestimos = () => {
             {nomeDropdown.length > 0 && (
                 <Dropdown
                     placeholder={"Funcionário"}
-                    selectedOption={nome}
-                    setSelectOption={setNome}
+                    selectedOption={nomeSelect}
+                    setSelectOption={setNomeSelect}
                     options={nomeDropdown}
                 />)
             }
-             {epiFinalizar.length > 0 && (
+            {epiFinalizar.length > 0 && (
                 <Dropdown
                     placeholder={"EPI"}
                     selectedOption={epiSelect}
