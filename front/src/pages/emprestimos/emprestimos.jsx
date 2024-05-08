@@ -201,9 +201,11 @@ const Emprestimos = () => {
                         epi: element.epi,
                         dater: dater,
                         dated: dated,
+                        delete: element.delete
                     });
                 });
-                setData(objectsData)
+                let filtro = objectsData.filter((x) => x.delete == null)
+                setData(filtro)
                 const epiData = objectsData.map((element) => {
                     return ({
                         value: element.epi,
