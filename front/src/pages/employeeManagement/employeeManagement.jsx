@@ -2,14 +2,14 @@ import BigButton from "../../component/bigButton/index";
 import InputTextDefault from "../../component/inputTextDefault/index";
 import { useState, useEffect } from "react";
 import Dropdown from "../../component/dropdown";
-import { useNavigate,Link } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import Table from "../../component/table";
 import SearchButton from "../../component/searchbutton";
 import ModalCadastroFuncionario from "../../component/modalCadastroFuncionario";
 import axios from "axios";
 import ModalEditarFuncionario
   from "../../component/modalEditarFuncionario";
-  import"./employee.css"
+import "./employee.css"
 
 const EmployeeManagement = () => {
   const [matricula, setMatricula] = useState("");
@@ -241,113 +241,115 @@ const EmployeeManagement = () => {
     setFilter(filtro)
   };
   return (
-    <div className="content-employee"> 
-    <div className="left">
-      {setor.length > 0 && (
-        <Dropdown
-          placeholder={"Setor"}
-          selectedOption={userChoiceSetor}
-          setSelectOption={setUserChoiceSetor}
-          options={setor}
+    <div className="content-employee">
+      <div className="left">
+        {setor.length > 0 && (
+          <Dropdown
+            placeholder={"Setor"}
+            selectedOption={userChoiceSetor}
+            setSelectOption={setUserChoiceSetor}
+            options={setor}
+          />
+        )}
+        {grupo.length > 0 && (
+          <Dropdown
+            placeholder={"Grupo"}
+            selectedOption={userChoiceGrupo}
+            setSelectOption={setUserChoiceGrupo}
+            options={grupo}
+          />
+        )}
+        <InputTextDefault
+          info={{
+            id: "Nome",
+            placeholder: "Nome",
+            value: nome,
+            func: setNome,
+          }}
         />
-      )}
-      {grupo.length > 0 && (
-        <Dropdown
-          placeholder={"Grupo"}
-          selectedOption={userChoiceGrupo}
-          setSelectOption={setUserChoiceGrupo}
-          options={grupo}
+        <InputTextDefault
+          info={{
+            id: "matricula",
+            placeholder: "Matrícula",
+            value: matricula,
+            func: setMatricula,
+          }}
         />
-      )}
-      <InputTextDefault
-        info={{
-          id: "Nome",
-          placeholder: "Nome",
-          value: nome,
-          func: setNome,
-        }}
-      />
-      <InputTextDefault
-        info={{
-          id: "matricula",
-          placeholder: "Matrícula",
-          value: matricula,
-          func: setMatricula,
-        }}
-      />
-      <SearchButton onClick={search} />
+        <SearchButton onClick={search} />
 
-      <div style={{ padding: "20px" }}>
-        {filter.length == 0 &&
-          <Table columns={columns} data={data} select={true} selectFunc={setTableChoice} />}
-        {filter.length > 0 &&
-          <Table columns={columns} data={filter} select={true} selectFunc={setTableChoice} />}
-      </div>
+        <div style={{ padding: "20px" }}>
+          {filter.length == 0 &&
+            <Table columns={columns} data={data} select={true} selectFunc={setTableChoice} />}
+          {filter.length > 0 &&
+            <Table columns={columns} data={filter} select={true} selectFunc={setTableChoice} />}
+        </div>
       </div>
       <div className="right">
-      <ModalCadastroFuncionario
-        info={{
-          metodo: "Cadastrar",
-          titulo: "Cadastro",
+        <ModalCadastroFuncionario
+          info={{
+            metodo: "Cadastrar",
+            titulo: "Cadastro",
 
-          idSetor: "setorModalCadastro",
-          placeholderSetor: "Setor",
-          funcSetor: setSetorModalCadastro,
-          valueSetor: setorModalCadastro,
+            idSetor: "setorModalCadastro",
+            placeholderSetor: "Setor",
+            funcSetor: setSetorModalCadastro,
+            valueSetor: setorModalCadastro,
 
-          idGrupo: "grupoModalCadastro",
-          placeholderGrupo: "Grupo",
-          funcGrupo: setGrupoModalCadastro,
-          valueGrupo: grupoModalCadastro,
+            idGrupo: "grupoModalCadastro",
+            placeholderGrupo: "Grupo",
+            funcGrupo: setGrupoModalCadastro,
+            valueGrupo: grupoModalCadastro,
 
-          idNome: "nomeModalCadastro",
-          placeholderNome: "Nome",
-          funcNome: setNomeModalCadastro,
-          valueNome: nomeModalCadastro,
+            idNome: "nomeModalCadastro",
+            placeholderNome: "Nome",
+            funcNome: setNomeModalCadastro,
+            valueNome: nomeModalCadastro,
 
-          idMatricula: "matriculaModalCadastro",
-          placeholderMatricula: "Matrícula",
-          funcMatricula: setMatriculaModalCadastro,
-          valueMatricula: matriculaModalCadastro,
-          cadastrar: handleClickPost
+            idMatricula: "matriculaModalCadastro",
+            placeholderMatricula: "Matrícula",
+            funcMatricula: setMatriculaModalCadastro,
+            valueMatricula: matriculaModalCadastro,
+            cadastrar: handleClickPost
 
-        }} />
-      <ModalEditarFuncionario
-        info={{
-          select: tableChoice,
+          }} />
+        <ModalEditarFuncionario
+          info={{
+            select: tableChoice,
 
-          metodo: "Editar",
-          titulo: "Editar",
+            metodo: "Editar",
+            titulo: "Editar",
 
-          idSetor: "setorModalEditar",
-          placeholderSetor: "Setor",
-          funcSetor: setSetorModalEditar,
-          valueSetor: setorModalEditar,
+            idSetor: "setorModalEditar",
+            placeholderSetor: "Setor",
+            funcSetor: setSetorModalEditar,
+            valueSetor: setorModalEditar,
 
-          idGrupo: "grupoModalEditar",
-          placeholderGrupo: "Grupo Homogeneo",
-          funcGrupo: setGrupoModalEditar,
-          valueGrupo: grupoModalEditar,
+            idGrupo: "grupoModalEditar",
+            placeholderGrupo: "Grupo Homogeneo",
+            funcGrupo: setGrupoModalEditar,
+            valueGrupo: grupoModalEditar,
 
-          idNome: "nomeModalEditar",
-          placeholderNome: "Nome",
-          funcNome: setNomeModalEditar,
-          valueNome: nomeModalEditar,
+            idNome: "nomeModalEditar",
+            placeholderNome: "Nome",
+            funcNome: setNomeModalEditar,
+            valueNome: nomeModalEditar,
 
-          idMatricula: "matriculaModalEditar",
-          placeholderMatricula: "Matrícula",
-          funcMatricula: setMatriculaModalEditar,
-          valueMatricula: matriculaModalEditar,
+            idMatricula: "matriculaModalEditar",
+            placeholderMatricula: "Matrícula",
+            funcMatricula: setMatriculaModalEditar,
+            valueMatricula: matriculaModalEditar,
 
-          editar: handleClickPut
+            editar: handleClickPut
 
-        }} />
-      <BigButton text={"Remover"} onClick={handleClickDelete} />
-      <Link to={"/home"}>
-        <button>Voltar</button>
-      </Link>
+          }} />
+        <BigButton text={"Remover"} onClick={handleClickDelete} />
+        <Link to={"/home"}>
+          <button>Voltar</button>
+        </Link>
+      </div>
     </div>
-  );
+  )
 };
+
 
 export default EmployeeManagement;
