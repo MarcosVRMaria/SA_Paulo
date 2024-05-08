@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Table from "../../component/table/index.jsx";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
 import moment from "moment";
@@ -308,8 +308,6 @@ const Emprestimos = () => {
     }
     return (
         <div>
-
-
             {matriculasEmprestimos.length > 0 && (
                 <Dropdown
                     placeholder={"Matricula"}
@@ -411,6 +409,10 @@ const Emprestimos = () => {
                     <Table columns={columns} data={filter} />}
             </div>
             <button onClick={handleClickGet}>Pesquisa</button>
+            <Link to={"/home"}>
+                <button>Voltar</button>
+            </Link>
+
         </div>
     )
 }

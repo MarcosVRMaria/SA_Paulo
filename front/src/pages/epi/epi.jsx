@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Table from "../../component/table";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault";
 import ModalCadastro from "../../component/modalCadastrarEpi/index.jsx"
 import ModalEditar from "../../component/modalEditarEpi/index.jsx";
@@ -32,8 +32,6 @@ const Epi = () => {
     const [tipoSelect, setTipoSelect] = useState("")
     const [marcaSelect, setMarcaSelect] = useState("")
 
-
-    const navigate = useNavigate()
 
     const columns = [
         {
@@ -259,134 +257,137 @@ const Epi = () => {
     return (
         <div className="content-epi">
             <div className="screen-control">
-            {tipo.length > 0 && (
-                <Dropdown
-                    placeholder={"Tipo"}
-                    selectedOption={tipoSelect}
-                    setSelectOption={setTipoSelect}
-                    options={tipo}
-                />)
-            }
-
-            {marca.length > 0 && (
-                <Dropdown
-                    placeholder={"Marca"}
-                    selectedOption={marcaSelect}
-                    setSelectOption={setMarcaSelect}
-                    options={marca}
-                />)
-            }
-
-
-            <InputTextDefault
-                info={{
-                    id: "nome",
-                    placeholder: "Nome",
-                    func: setNome,
-                    value: nome
-                }}
-            />
-            <InputTextDefault
-                info={{
-                    id: "ca",
-                    placeholder: "CA",
-                    func: setCa,
-                    value: ca
-                }}
-            />
-            <InputTextDefault
-                info={{
-                    id: "validade",
-                    placeholder: "Data de validade",
-                    func: setDatav,
-                    value: datav
-                }}
-            />
-            <ModalCadastro
-                info={{
-                    metodo: "Cadastrar",
-                    titulo: "Cadastro",
-
-                    idTipo: "tipoModalCadastro",
-                    placeholderTipo: "Tipo",
-                    funcTipo: setTipoModalCadastro,
-                    valueTipo: tipoModalCadastro,
-
-                    idMarca: "marcaModalCadastro",
-                    placeholderMarca: "Marca",
-                    funcMarca: setMarcaModalCadastro,
-                    valueMarca: marcaModalCadastro,
-
-                    idNome: "nomeModalCadastro",
-                    placeholderNome: "Nome",
-                    funcNome: setNomeModalCadastro,
-                    valueNome: nomeModalCadastro,
-
-                    idCa: "caModalCadastro",
-                    placeholderCa: "CA",
-                    funcCa: setCaModalCadastro,
-                    valueCa: caModalCadastro,
-
-                    idDatav: "validadeModalCadastro",
-                    placeholderDatav: "Data de validade",
-                    funcDatav: setDatavModalCadastro,
-                    valueDatav: datavModalCadastro,
-
-                    cadastrar: handleClickPost
-
-                }}
-            />
-
-            <ModalEditar
-                info={{
-                    select: select,
-
-                    metodo: "Editar",
-                    titulo: "Editar",
-
-                    idTipo: "tipoModalEditar",
-                    placeholderTipo: "Tipo",
-                    funcTipo: setTipoModalEditar,
-                    valueTipo: tipoModalEditar,
-
-                    idMarca: "marcaModalEditar",
-                    placeholderMarca: "Marca",
-                    funcMarca: setMarcaModalEditar,
-                    valueMarca: marcaModalEditar,
-
-                    idNome: "nomeModalEditar",
-                    placeholderNome: "Nome",
-                    funcNome: setNomeModalEditar,
-                    valueNome: nomeModalEditar,
-
-                    idCa: "caModalEditar",
-                    placeholderCa: "CA",
-                    funcCa: setCaModalEditar,
-                    valueCa: caModalEditar,
-
-                    idDatav: "validadeModalEditar",
-                    placeholderDatav: "Data de validade",
-                    funcDatav: setDatavModalEditar,
-                    valueDatav: datavModalEditar,
-
-                    editar: handleClickPut
-
-                }}
-            />
-            <div style={{
-                position: "fixed",
-                top: "25%",
-                left: "10%",
-            }} >
-                {filter.length == 0 &&
-                    <Table columns={columns} data={data} select={true} selectFunc={setSelect} />
-
+                {tipo.length > 0 && (
+                    <Dropdown
+                        placeholder={"Tipo"}
+                        selectedOption={tipoSelect}
+                        setSelectOption={setTipoSelect}
+                        options={tipo}
+                    />)
                 }
-                {filter.length > 0 &&
-                    <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
-            </div>
-            <button className="bnt-pesquisar-epi" onClick={handleClickGet}>Pesquisa</button>
-            <button className="bnt-apagar-epi" onClick={handleClickDelete}>Apagar</button>
+
+                {marca.length > 0 && (
+                    <Dropdown
+                        placeholder={"Marca"}
+                        selectedOption={marcaSelect}
+                        setSelectOption={setMarcaSelect}
+                        options={marca}
+                    />)
+                }
+
+
+                <InputTextDefault
+                    info={{
+                        id: "nome",
+                        placeholder: "Nome",
+                        func: setNome,
+                        value: nome
+                    }}
+                />
+                <InputTextDefault
+                    info={{
+                        id: "ca",
+                        placeholder: "CA",
+                        func: setCa,
+                        value: ca
+                    }}
+                />
+                <InputTextDefault
+                    info={{
+                        id: "validade",
+                        placeholder: "Data de validade",
+                        func: setDatav,
+                        value: datav
+                    }}
+                />
+                <ModalCadastro
+                    info={{
+                        metodo: "Cadastrar",
+                        titulo: "Cadastro",
+
+                        idTipo: "tipoModalCadastro",
+                        placeholderTipo: "Tipo",
+                        funcTipo: setTipoModalCadastro,
+                        valueTipo: tipoModalCadastro,
+
+                        idMarca: "marcaModalCadastro",
+                        placeholderMarca: "Marca",
+                        funcMarca: setMarcaModalCadastro,
+                        valueMarca: marcaModalCadastro,
+
+                        idNome: "nomeModalCadastro",
+                        placeholderNome: "Nome",
+                        funcNome: setNomeModalCadastro,
+                        valueNome: nomeModalCadastro,
+
+                        idCa: "caModalCadastro",
+                        placeholderCa: "CA",
+                        funcCa: setCaModalCadastro,
+                        valueCa: caModalCadastro,
+
+                        idDatav: "validadeModalCadastro",
+                        placeholderDatav: "Data de validade",
+                        funcDatav: setDatavModalCadastro,
+                        valueDatav: datavModalCadastro,
+
+                        cadastrar: handleClickPost
+
+                    }}
+                />
+
+                <ModalEditar
+                    info={{
+                        select: select,
+
+                        metodo: "Editar",
+                        titulo: "Editar",
+
+                        idTipo: "tipoModalEditar",
+                        placeholderTipo: "Tipo",
+                        funcTipo: setTipoModalEditar,
+                        valueTipo: tipoModalEditar,
+
+                        idMarca: "marcaModalEditar",
+                        placeholderMarca: "Marca",
+                        funcMarca: setMarcaModalEditar,
+                        valueMarca: marcaModalEditar,
+
+                        idNome: "nomeModalEditar",
+                        placeholderNome: "Nome",
+                        funcNome: setNomeModalEditar,
+                        valueNome: nomeModalEditar,
+
+                        idCa: "caModalEditar",
+                        placeholderCa: "CA",
+                        funcCa: setCaModalEditar,
+                        valueCa: caModalEditar,
+
+                        idDatav: "validadeModalEditar",
+                        placeholderDatav: "Data de validade",
+                        funcDatav: setDatavModalEditar,
+                        valueDatav: datavModalEditar,
+
+                        editar: handleClickPut
+
+                    }}
+                />
+                <div style={{
+                    position: "fixed",
+                    top: "25%",
+                    left: "10%",
+                }} >
+                    {filter.length == 0 &&
+                        <Table columns={columns} data={data} select={true} selectFunc={setSelect} />
+
+                    }
+                    {filter.length > 0 &&
+                        <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
+                </div>
+                <button className="bnt-pesquisar-epi" onClick={handleClickGet}>Pesquisa</button>
+                <button className="bnt-apagar-epi" onClick={handleClickDelete}>Apagar</button>
+                <Link to={"/home"}>
+                    <button>Voltar</button>
+                </Link>
             </div>
         </div>
 
