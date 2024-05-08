@@ -4,6 +4,7 @@ import axios from "axios";
 import moment from "moment";
 import InputTextDefault from "../../component/inputTextDefault/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
+import "./history.css"
 import { useNavigate,Link } from "react-router-dom"
 
 
@@ -220,7 +221,7 @@ const Historico = () => {
     };
 
     return (
-        <div>
+        <div className="history-content">
             {epiFinalizar.length > 0 && (
                 <Dropdown
                     placeholder={"EPI"}
@@ -249,7 +250,7 @@ const Historico = () => {
             <div style={{
                 position: "fixed",
                 top: "25%",
-                left: "10%",
+                left: "25%",
             }} >
                 {filter.length == 0 &&
                     <Table columns={columns} data={data} />
@@ -257,10 +258,16 @@ const Historico = () => {
                 {filter.length > 0 &&
                     <Table columns={columns} data={filter} />}
             </div>
-            <button onClick={handleClickGet}>Pesquisa</button>
+            <button className="bnt-pesquisa" onClick={handleClickGet}>
+                <img className="img-pesquisa" src="https://cdn-icons-png.flaticon.com/512/54/54481.png" height={30} width={30} />
+            </button>
+          
             <Link to={"/home"}>
                 <button>Voltar</button>
             </Link>
+                   <div className="RodaPe">
+                <h1>eeeeeeee</h1>
+            </div>
         </div>
     )
 }

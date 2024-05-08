@@ -20,7 +20,9 @@ const Dropdown = ({ selectedOption, setSelectOption, options, placeholder }) => 
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      borderRadius: '10px', // Ajuste conforme necessário
+      borderRadius: '10px', 
+      borderColor:"black",
+      // Ajuste conforme necessário
     }),
   };
   return (
