@@ -44,7 +44,7 @@ function ModalFinalizar({ info }) {
                     <Button variant="secondary" onClick={handleClose}>
                         Fechar
                     </Button>
-                    <Button variant="primary" onClick={info.metodo}>Finalizar Empréstimo</Button>
+                    <Button variant="primary" onClick={info.ok}>Finalizar Empréstimo</Button>
                 </Modal.Footer>
             </Modal>
         </>

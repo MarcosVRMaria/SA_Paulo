@@ -76,7 +76,6 @@ const Historico = () => {
         });
     }
 
-
     const getAllTables = (() => {
         let config = {
             method: 'get',
@@ -175,10 +174,12 @@ const Historico = () => {
                         epi: element.epi,
                         dater: dater,
                         dated: dated,
+                        delete: element.delete
                     });
                 });
                 console.log(objectsData)
-                setData(objectsData)
+                let filtro = objectsData.filter((x) => x.delete == true)
+                setData(filtro)
                 const epiEmprestimos = objectsData.map((element) => {
                     return ({
                         epi: element.epi

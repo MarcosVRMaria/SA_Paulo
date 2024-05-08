@@ -169,7 +169,6 @@ const Emprestimos = () => {
                 });
 
 
-
                 // Chamando a função para remover itens duplicados
                 const funcionaioDataSemDuplicados = removerItensDuplicados(funcionaioData);
                 const matriculaDataSemDuplicados = removerItensDuplicados(matriculaData);
@@ -236,9 +235,11 @@ const Emprestimos = () => {
                         epi: element.epi,
                         dater: dater,
                         dated: dated,
+                        delete: element.delete
                     });
                 });
-                setData(objectsData)
+                let filtro = objectsData.filter((x) => x.delete == null)
+                setData(filtro)
                 const epiData = objectsData.map((element) => {
                     return ({
                         value: element.epi,
@@ -319,7 +320,31 @@ const Emprestimos = () => {
         getAllData()
 
     }
+    const handleClickDelete = async () => {
 
+        let data = JSON.stringify({
+            delete: true
+        });
+        console.log(data)
+
+        let config = {
+            method: 'put',
+            url: `http://localhost:3000/deleteEmprestimo/${matriculaModalFinalizar}/${epiModalFinalizar}`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: data
+        }
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        alert("Edição realizada com sucesso")
+        getAllData()
+    }
     return (
         <div>
 
@@ -407,9 +432,10 @@ const Emprestimos = () => {
                     matricula: matriculasEmprestimos,
 
                     emprestimoSelect: epiModalFinalizar,
-                    setEmprestimosSelect: setEpiModalFinalizar,
-                    emprestimo: epiFinalizar
+                    setEmprestimoSelect: setEpiModalFinalizar,
+                    emprestimo: epiFinalizar,
 
+                    ok: handleClickDelete
                 }}
             />
             <div style={{
