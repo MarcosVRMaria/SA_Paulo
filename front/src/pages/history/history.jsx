@@ -4,8 +4,8 @@ import axios from "axios";
 import moment from "moment";
 import InputTextDefault from "../../component/inputTextDefault/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
-import { useNavigate } from "react-router-dom"
 import "./history.css"
+import { useNavigate,Link } from "react-router-dom"
 
 
 const Historico = () => {
@@ -20,8 +20,6 @@ const Historico = () => {
     const [data, setData] = useState([])
     const [filter, setFilter] = useState([])
 
-
-    const navigate = useNavigate()
 
     const columns = [
         {
@@ -263,7 +261,11 @@ const Historico = () => {
             <button className="bnt-pesquisa" onClick={handleClickGet}>
                 <img className="img-pesquisa" src="https://cdn-icons-png.flaticon.com/512/54/54481.png" height={30} width={30} />
             </button>
-            <div className="RodaPe">
+          
+            <Link to={"/home"}>
+                <button>Voltar</button>
+            </Link>
+                   <div className="RodaPe">
                 <h1>eeeeeeee</h1>
             </div>
         </div>

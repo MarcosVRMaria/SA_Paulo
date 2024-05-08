@@ -2,13 +2,14 @@ import BigButton from "../../component/bigButton/index";
 import InputTextDefault from "../../component/inputTextDefault/index";
 import { useState, useEffect } from "react";
 import Dropdown from "../../component/dropdown";
+import { useNavigate, Link } from "react-router-dom"
 import Table from "../../component/table";
 import SearchButton from "../../component/searchbutton";
 import ModalCadastroFuncionario from "../../component/modalCadastroFuncionario";
 import axios from "axios";
 import ModalEditarFuncionario
   from "../../component/modalEditarFuncionario";
-  import"./employee.css"
+import "./employee.css"
 
 const EmployeeManagement = () => {
   const [matricula, setMatricula] = useState("");
@@ -124,63 +125,63 @@ const EmployeeManagement = () => {
     filtro();
   };
   const handleClickPut = async () => {
-    
+
     if (tableChoice.length > 1 || tableChoice.length == 0) {
-        return alert("Selecione apenas um para editar.")
+      return alert("Selecione apenas um para editar.")
     }
 
 
     let data = JSON.stringify({
-        setor: setorModalEditar,
-        nome: nomeModalEditar,
-        matricula: matriculaModalEditar,
-        homogenio: grupoModalEditar,
+      setor: setorModalEditar,
+      nome: nomeModalEditar,
+      matricula: matriculaModalEditar,
+      homogenio: grupoModalEditar,
     });
     console.log(data)
 
     let config = {
-        method: 'put',
-        url: `http://localhost:3000/editarFuncionario/${matriculaModalEditar}`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: data
+      method: 'put',
+      url: `http://localhost:3000/editarFuncionario/${matriculaModalEditar}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data
     }
 
     axios.request(config)
-        .then((response) => {
-            console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     alert("Edição realizada com sucesso")
     getAllData()
-}
+  }
 
-const handleClickDelete = async () => {
-  const objectsData = tableChoice.map((element) => {
+  const handleClickDelete = async () => {
+    const objectsData = tableChoice.map((element) => {
       return (element.matricula);
-  });
-  console.log(objectsData)
-  let config = {
+    });
+    console.log(objectsData)
+    let config = {
       method: 'delete',
       url: `http://localhost:3000/deleteFuncionario/${objectsData}`,
       headers: {
-          'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
       },
-  }
+    }
 
-  axios.request(config)
+    axios.request(config)
       .then((response) => {
-          console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data));
       })
       .catch((error) => {
-          console.log(error);
+        console.log(error);
       });
-  alert("Remoção realizada com sucesso")
-  getAllData()
-}
+    alert("Remoção realizada com sucesso")
+    getAllData()
+  }
 
   // Função para remover itens duplicados do array de objetos
   const removerItensDuplicados = (array) => {
@@ -240,78 +241,78 @@ const handleClickDelete = async () => {
     setFilter(filtro)
   };
   return (
-    <div className="content-employee"> 
-    <div className="left">
-      {setor.length > 0 && (
-        <Dropdown
-          placeholder={"Setor"}
-          selectedOption={userChoiceSetor}
-          setSelectOption={setUserChoiceSetor}
-          options={setor}
+    <div className="content-employee">
+      <div className="left">
+        {setor.length > 0 && (
+          <Dropdown
+            placeholder={"Setor"}
+            selectedOption={userChoiceSetor}
+            setSelectOption={setUserChoiceSetor}
+            options={setor}
+          />
+        )}
+        {grupo.length > 0 && (
+          <Dropdown
+            placeholder={"Grupo"}
+            selectedOption={userChoiceGrupo}
+            setSelectOption={setUserChoiceGrupo}
+            options={grupo}
+          />
+        )}
+        <InputTextDefault
+          info={{
+            id: "Nome",
+            placeholder: "Nome",
+            value: nome,
+            func: setNome,
+          }}
         />
-      )}
-      {grupo.length > 0 && (
-        <Dropdown
-          placeholder={"Grupo"}
-          selectedOption={userChoiceGrupo}
-          setSelectOption={setUserChoiceGrupo}
-          options={grupo}
+        <InputTextDefault
+          info={{
+            id: "matricula",
+            placeholder: "Matrícula",
+            value: matricula,
+            func: setMatricula,
+          }}
         />
-      )}
-      <InputTextDefault
-        info={{
-          id: "Nome",
-          placeholder: "Nome",
-          value: nome,
-          func: setNome,
-        }}
-      />
-      <InputTextDefault
-        info={{
-          id: "matricula",
-          placeholder: "Matrícula",
-          value: matricula,
-          func: setMatricula,
-        }}
-      />
-      <SearchButton onClick={search} />
+        <SearchButton onClick={search} />
 
-      <div style={{ padding: "20px" }}>
-        {filter.length == 0 &&
-          <Table columns={columns} data={data} select={true} selectFunc={setTableChoice} />}
-        {filter.length > 0 &&
-          <Table columns={columns} data={filter} select={true} selectFunc={setTableChoice} />}
-      </div>
+        <div style={{ padding: "20px" }}>
+          {filter.length == 0 &&
+            <Table columns={columns} data={data} select={true} selectFunc={setTableChoice} />}
+          {filter.length > 0 &&
+            <Table columns={columns} data={filter} select={true} selectFunc={setTableChoice} />}
+        </div>
       </div>
       <div className="right">
-      <ModalCadastroFuncionario
-        info={{
-          metodo: "Cadastrar",
-          titulo: "Cadastro",
+        <ModalCadastroFuncionario
+          info={{
+            metodo: "Cadastrar",
+            titulo: "Cadastro",
 
-          idSetor: "setorModalCadastro",
-          placeholderSetor: "Setor",
-          funcSetor: setSetorModalCadastro,
-          valueSetor: setorModalCadastro,
+            idSetor: "setorModalCadastro",
+            placeholderSetor: "Setor",
+            funcSetor: setSetorModalCadastro,
+            valueSetor: setorModalCadastro,
 
-          idGrupo: "grupoModalCadastro",
-          placeholderGrupo: "Grupo",
-          funcGrupo: setGrupoModalCadastro,
-          valueGrupo: grupoModalCadastro,
+            idGrupo: "grupoModalCadastro",
+            placeholderGrupo: "Grupo",
+            funcGrupo: setGrupoModalCadastro,
+            valueGrupo: grupoModalCadastro,
 
-          idNome: "nomeModalCadastro",
-          placeholderNome: "Nome",
-          funcNome: setNomeModalCadastro,
-          valueNome: nomeModalCadastro,
+            idNome: "nomeModalCadastro",
+            placeholderNome: "Nome",
+            funcNome: setNomeModalCadastro,
+            valueNome: nomeModalCadastro,
 
-          idMatricula: "matriculaModalCadastro",
-          placeholderMatricula: "Matrícula",
-          funcMatricula: setMatriculaModalCadastro,
-          valueMatricula: matriculaModalCadastro,
-          cadastrar: handleClickPost
+            idMatricula: "matriculaModalCadastro",
+            placeholderMatricula: "Matrícula",
+            funcMatricula: setMatriculaModalCadastro,
+            valueMatricula: matriculaModalCadastro,
+            cadastrar: handleClickPost
 
-        }} />
-        <ModalEditarFuncionario 
+          }} />
+        <ModalEditarFuncionario
           info={{
             select: tableChoice,
 
@@ -340,11 +341,15 @@ const handleClickDelete = async () => {
 
             editar: handleClickPut
 
-        }}/>
-      <BigButton text={"Remover"}  onClick={handleClickDelete}/>
+          }} />
+        <BigButton text={"Remover"} onClick={handleClickDelete} />
+        <Link to={"/home"}>
+          <button>Voltar</button>
+        </Link>
       </div>
     </div>
-  );
+  )
 };
+
 
 export default EmployeeManagement;

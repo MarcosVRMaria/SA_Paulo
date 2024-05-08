@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Table from "../../component/table";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault";
 import ModalCadastro from "../../component/modalCadastrarEpi/index.jsx"
 import ModalEditar from "../../component/modalEditarEpi/index.jsx";
@@ -32,8 +32,6 @@ const Epi = () => {
     const [tipoSelect, setTipoSelect] = useState("")
     const [marcaSelect, setMarcaSelect] = useState("")
 
-
-    const navigate = useNavigate()
 
     const columns = [
         {
@@ -258,138 +256,137 @@ const Epi = () => {
 
     return (
         <div className="content-epi">
-            <div className="left">
-            {tipo.length > 0 && (
-                <Dropdown
-                    placeholder={"Tipo"}
-                    selectedOption={tipoSelect}
-                    setSelectOption={setTipoSelect}
-                    options={tipo}
-                />)
-            }
-
-            {marca.length > 0 && (
-                <Dropdown
-                    placeholder={"Marca"}
-                    selectedOption={marcaSelect}
-                    setSelectOption={setMarcaSelect}
-                    options={marca}
-                />)
-            }
-
-
-            <InputTextDefault
-                info={{
-                    id: "nome",
-                    placeholder: "Nome",
-                    func: setNome,
-                    value: nome
-                }}
-            />
-            <InputTextDefault
-                info={{
-                    id: "ca",
-                    placeholder: "CA",
-                    func: setCa,
-                    value: ca
-                }}
-            />
-            <InputTextDefault
-                info={{
-                    id: "validade",
-                    placeholder: "Data de validade",
-                    func: setDatav,
-                    value: datav
-                }}
-            />
-  <div style={{
-                position: "fixed",
-                top: "15%",
-                left: "7%",
-            }} >
-                {filter.length == 0 &&
-                    <Table columns={columns} data={data} select={true} selectFunc={setSelect} />
-
+            <div className="screen-control">
+                {tipo.length > 0 && (
+                    <Dropdown
+                        placeholder={"Tipo"}
+                        selectedOption={tipoSelect}
+                        setSelectOption={setTipoSelect}
+                        options={tipo}
+                    />)
                 }
-                {filter.length > 0 &&
-                    <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
-            </div>
-            </div>
-            <div className="right-epi">
-            <ModalCadastro
-                info={{
-                    metodo: "Cadastrar",
-                    titulo: "Cadastro",
 
-                    idTipo: "tipoModalCadastro",
-                    placeholderTipo: "Tipo",
-                    funcTipo: setTipoModalCadastro,
-                    valueTipo: tipoModalCadastro,
+                {marca.length > 0 && (
+                    <Dropdown
+                        placeholder={"Marca"}
+                        selectedOption={marcaSelect}
+                        setSelectOption={setMarcaSelect}
+                        options={marca}
+                    />)
+                }
 
-                    idMarca: "marcaModalCadastro",
-                    placeholderMarca: "Marca",
-                    funcMarca: setMarcaModalCadastro,
-                    valueMarca: marcaModalCadastro,
+                <InputTextDefault
+                    info={{
+                        id: "nome",
+                        placeholder: "Nome",
+                        func: setNome,
+                        value: nome
+                    }}
+                />
+                <InputTextDefault
+                    info={{
+                        id: "ca",
+                        placeholder: "CA",
+                        func: setCa,
+                        value: ca
+                    }}
+                />
+                <InputTextDefault
+                    info={{
+                        id: "validade",
+                        placeholder: "Data de validade",
+                        func: setDatav,
+                        value: datav
+                    }}
+                />
+                <ModalCadastro
+                    info={{
+                        metodo: "Cadastrar",
+                        titulo: "Cadastro",
 
-                    idNome: "nomeModalCadastro",
-                    placeholderNome: "Nome",
-                    funcNome: setNomeModalCadastro,
-                    valueNome: nomeModalCadastro,
+                        idTipo: "tipoModalCadastro",
+                        placeholderTipo: "Tipo",
+                        funcTipo: setTipoModalCadastro,
+                        valueTipo: tipoModalCadastro,
 
-                    idCa: "caModalCadastro",
-                    placeholderCa: "CA",
-                    funcCa: setCaModalCadastro,
-                    valueCa: caModalCadastro,
+                        idMarca: "marcaModalCadastro",
+                        placeholderMarca: "Marca",
+                        funcMarca: setMarcaModalCadastro,
+                        valueMarca: marcaModalCadastro,
 
-                    idDatav: "validadeModalCadastro",
-                    placeholderDatav: "Data de validade",
-                    funcDatav: setDatavModalCadastro,
-                    valueDatav: datavModalCadastro,
+                        idNome: "nomeModalCadastro",
+                        placeholderNome: "Nome",
+                        funcNome: setNomeModalCadastro,
+                        valueNome: nomeModalCadastro,
 
-                    cadastrar: handleClickPost
+                        idCa: "caModalCadastro",
+                        placeholderCa: "CA",
+                        funcCa: setCaModalCadastro,
+                        valueCa: caModalCadastro,
 
-                }}
-            />
+                        idDatav: "validadeModalCadastro",
+                        placeholderDatav: "Data de validade",
+                        funcDatav: setDatavModalCadastro,
+                        valueDatav: datavModalCadastro,
 
-            <ModalEditar
-                info={{
-                    select: select,
+                        cadastrar: handleClickPost
 
-                    metodo: "Editar",
-                    titulo: "Editar",
+                    }}
+                />
 
-                    idTipo: "tipoModalEditar",
-                    placeholderTipo: "Tipo",
-                    funcTipo: setTipoModalEditar,
-                    valueTipo: tipoModalEditar,
+                <ModalEditar
+                    info={{
+                        select: select,
 
-                    idMarca: "marcaModalEditar",
-                    placeholderMarca: "Marca",
-                    funcMarca: setMarcaModalEditar,
-                    valueMarca: marcaModalEditar,
+                        metodo: "Editar",
+                        titulo: "Editar",
 
-                    idNome: "nomeModalEditar",
-                    placeholderNome: "Nome",
-                    funcNome: setNomeModalEditar,
-                    valueNome: nomeModalEditar,
+                        idTipo: "tipoModalEditar",
+                        placeholderTipo: "Tipo",
+                        funcTipo: setTipoModalEditar,
+                        valueTipo: tipoModalEditar,
 
-                    idCa: "caModalEditar",
-                    placeholderCa: "CA",
-                    funcCa: setCaModalEditar,
-                    valueCa: caModalEditar,
+                        idMarca: "marcaModalEditar",
+                        placeholderMarca: "Marca",
+                        funcMarca: setMarcaModalEditar,
+                        valueMarca: marcaModalEditar,
 
-                    idDatav: "validadeModalEditar",
-                    placeholderDatav: "Data de validade",
-                    funcDatav: setDatavModalEditar,
-                    valueDatav: datavModalEditar,
+                        idNome: "nomeModalEditar",
+                        placeholderNome: "Nome",
+                        funcNome: setNomeModalEditar,
+                        valueNome: nomeModalEditar,
 
-                    editar: handleClickPut
+                        idCa: "caModalEditar",
+                        placeholderCa: "CA",
+                        funcCa: setCaModalEditar,
+                        valueCa: caModalEditar,
 
-                }}
-            />
-          
-            <button className="bnt-pesquisar-epi" onClick={handleClickGet}>Pesquisa</button>
-            <button className="bnt-apagar-epi" onClick={handleClickDelete}>Apagar</button>
+                        idDatav: "validadeModalEditar",
+                        placeholderDatav: "Data de validade",
+                        funcDatav: setDatavModalEditar,
+                        valueDatav: datavModalEditar,
+
+                        editar: handleClickPut
+
+                    }}
+                />
+                <div style={{
+                    position: "fixed",
+                    top: "25%",
+                    left: "10%",
+                }} >
+                    {filter.length == 0 &&
+                        <Table columns={columns} data={data} select={true} selectFunc={setSelect} />
+
+                    }
+                    {filter.length > 0 &&
+                        <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
+                </div>
+                <button className="bnt-pesquisar-epi" onClick={handleClickGet}>Pesquisa</button>
+                <button className="bnt-apagar-epi" onClick={handleClickDelete}>Apagar</button>
+                <Link to={"/home"}>
+                    <button>Voltar</button>
+                </Link>
             </div>
         </div>
 
