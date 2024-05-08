@@ -1,0 +1,17 @@
+:root{
+    --background : #f2f2f2;
+    --main-color : #023f81;
+}
+
+.bnt-pesquisa{
+    border-radius: 5px;
+padding-bottom: 10px;
+height: 36px;
+width: 45px;
+background-color: var(--main-color);
+}
+.history-content{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
