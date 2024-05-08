@@ -8,6 +8,7 @@ import ModalCadastroFuncionario from "../../component/modalCadastroFuncionario";
 import axios from "axios";
 import ModalEditarFuncionario
   from "../../component/modalEditarFuncionario";
+  import"./employee.css"
 
 const EmployeeManagement = () => {
   const [matricula, setMatricula] = useState("");
@@ -239,7 +240,8 @@ const handleClickDelete = async () => {
     setFilter(filtro)
   };
   return (
-    <div>
+    <div className="content-employee"> 
+    <div className="left">
       {setor.length > 0 && (
         <Dropdown
           placeholder={"Setor"}
@@ -280,6 +282,8 @@ const handleClickDelete = async () => {
         {filter.length > 0 &&
           <Table columns={columns} data={filter} select={true} selectFunc={setTableChoice} />}
       </div>
+      </div>
+      <div className="right">
       <ModalCadastroFuncionario
         info={{
           metodo: "Cadastrar",
@@ -337,7 +341,8 @@ const handleClickDelete = async () => {
             editar: handleClickPut
 
         }}/>
-      <BigButton text={"Remover"} onClick={handleClickDelete}/>
+      <BigButton text={"Remover"}  onClick={handleClickDelete}/>
+      </div>
     </div>
   );
 };

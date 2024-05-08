@@ -1,0 +1,22 @@
+.right {
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right button {
+    margin-bottom: 15px;
+    height: 43px;
+    border-radius: 10px;    
+}
+
+
+.left {
+    width: 60vw;
+}
+
+.content-employee {
+    display: flex;
+    justify-content: space-around;
+}
