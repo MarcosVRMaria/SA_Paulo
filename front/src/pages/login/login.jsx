@@ -57,8 +57,8 @@ const Login = () => {
                 <img src="https://smslabore.com.br/wp-content/uploads/2017/10/Labore-Consuloria-EPI-Placa.png" width="320" height="300" />
             </div>
             <div className="RodaPe">
-                <h1>aaaaaaa</h1>
-
+                <h1>SENAI - São José</h1>
+                <h3>Produto feito em conjunto com a turma do Senai São José, para situação de aprendizagem 2024/1</h3>
             </div>
         </div>
     );
