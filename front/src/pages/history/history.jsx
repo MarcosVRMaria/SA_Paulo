@@ -5,7 +5,8 @@ import moment from "moment";
 import InputTextDefault from "../../component/inputTextDefault/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
 import "./history.css"
-import { useNavigate,Link } from "react-router-dom"
+import SearchButton from "../../component/searchbutton";
+import { useNavigate, Link } from "react-router-dom"
 
 
 const Historico = () => {
@@ -222,50 +223,52 @@ const Historico = () => {
 
     return (
         <div className="history-content">
-            {epiFinalizar.length > 0 && (
-                <Dropdown
-                    placeholder={"EPI"}
-                    selectedOption={epi}
-                    setSelectOption={setEpi}
-                    options={epiFinalizar}
-                />)
-            }
-
-            {matriculasEmprestimos.length > 0 && (
-                <Dropdown
-                    placeholder={"Matricula"}
-                    selectedOption={matricula}
-                    setSelectOption={setMatricula}
-                    options={matriculasEmprestimos}
-                />)
-            }
-            <InputTextDefault
-                info={{
-                    id: "dataDevolucao",
-                    placeholder: "Data de devolução",
-                    func: setDatad,
-                    value: datad
-                }}
-            />
-            <div style={{
-                position: "fixed",
-                top: "25%",
-                left: "25%",
-            }} >
-                {filter.length == 0 &&
-                    <Table columns={columns} data={data} />
+            <div className="left-history">
+                {epiFinalizar.length > 0 && (
+                    <Dropdown
+                        placeholder={"EPI"}
+                        selectedOption={epi}
+                        setSelectOption={setEpi}
+                        options={epiFinalizar}
+                    />)
                 }
-                {filter.length > 0 &&
-                    <Table columns={columns} data={filter} />}
+
+                {matriculasEmprestimos.length > 0 && (
+                    <Dropdown
+                        placeholder={"Matricula"}
+                        selectedOption={matricula}
+                        setSelectOption={setMatricula}
+                        options={matriculasEmprestimos}
+                    />)
+                }
+                <InputTextDefault
+                    info={{
+                        id: "dataDevolucao",
+                        placeholder: "Data de devolução",
+                        func: setDatad,
+                        value: datad
+                    }}
+                />
+                <div style={{
+                    position: "fixed",
+                    top: "25%",
+                    left: "15%",
+                }} >
+                    {filter.length == 0 &&
+                        <Table columns={columns} data={data} />
+                    }
+                    {filter.length > 0 &&
+                        <Table columns={columns} data={filter} />}
+                </div>
+               
+                <SearchButton onClick={handleClickGet} />
             </div>
-            <button className="bnt-pesquisa" onClick={handleClickGet}>
-                <img className="img-pesquisa" src="https://cdn-icons-png.flaticon.com/512/54/54481.png" height={30} width={30} />
-            </button>
-          
-            <Link to={"/home"}>
-                <button>Voltar</button>
-            </Link>
-                   <div className="RodaPe">
+            <div className="right-history">
+                <Link to={"/home"}>
+                    <button className="bnt-voltar">Voltar</button>
+                </Link>
+            </div>
+            <div className="RodaPe">
                 <h1>eeeeeeee</h1>
             </div>
         </div>

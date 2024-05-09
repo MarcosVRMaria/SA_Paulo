@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import Table from "../../component/table/index.jsx";
 import axios from "axios";
-import { useNavigate,Link } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import InputTextDefault from "../../component/inputTextDefault/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
 import moment from "moment";
 import ModalCadastro from "../../component/modalCadastroEmprestimo/index.jsx";
 import ModalFinalizar from "../../component/modalDevolucaoEmprestimo/index.jsx";
+import "./emprestimos.css"
 
 const Emprestimos = () => {
     const [nome, setNome] = useState("")
@@ -494,6 +495,9 @@ const Emprestimos = () => {
             <Link to={"/home"}>
                 <button>Voltar</button>
             </Link>
+            <div className="RodaPe">
+                <h1>fffffffffffffffffffffffffff</h1>
+            </div>
 
         </div>
     )

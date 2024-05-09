@@ -344,8 +344,11 @@ const EmployeeManagement = () => {
           }} />
         <BigButton text={"Remover"} onClick={handleClickDelete} />
         <Link to={"/home"}>
-          <button>Voltar</button>
+          <button className="bnt-voltar">Voltar</button>
         </Link>
+      </div>
+      <div className="RodaPe">
+        <h1>gggggggggg</h1>
       </div>
     </div>
   )

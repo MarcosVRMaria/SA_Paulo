@@ -3,12 +3,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 50px;
 }
 
 .right button {
-    margin-bottom: 15px;
+    margin: 0px 0px 15px 0px !important;
     height: 43px;
-    border-radius: 10px;    
+    border-radius: 10px;
+    width: 100%;  
 }
 
 

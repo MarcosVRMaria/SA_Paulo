@@ -256,7 +256,7 @@ const Epi = () => {
 
     return (
         <div className="content-epi">
-            <div className="screen-control">
+            <div className="left-epi">
                 {tipo.length > 0 && (
                     <Dropdown
                         placeholder={"Tipo"}
@@ -299,6 +299,20 @@ const Epi = () => {
                         value: datav
                     }}
                 />
+                  <div style={{
+                    position: "fixed",
+                    top: "25%",
+                    left: "10%",
+                }} >
+                    {filter.length == 0 &&
+                        <Table columns={columns} data={data} select={true} selectFunc={setSelect} />
+
+                    }
+                    {filter.length > 0 &&
+                        <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
+                </div>
+                </div>
+                <div className="right-epi">
                 <ModalCadastro
                     info={{
                         metodo: "Cadastrar",
@@ -370,24 +384,17 @@ const Epi = () => {
 
                     }}
                 />
-                <div style={{
-                    position: "fixed",
-                    top: "25%",
-                    left: "10%",
-                }} >
-                    {filter.length == 0 &&
-                        <Table columns={columns} data={data} select={true} selectFunc={setSelect} />
-
-                    }
-                    {filter.length > 0 &&
-                        <Table columns={columns} data={filter} select={true} selectFunc={setSelect} />}
-                </div>
+              
                 <button className="bnt-pesquisar-epi" onClick={handleClickGet}>Pesquisa</button>
+                
                 <button className="bnt-apagar-epi" onClick={handleClickDelete}>Apagar</button>
                 <Link to={"/home"}>
-                    <button>Voltar</button>
+                    <button className="bnt-voltar">Voltar</button>
                 </Link>
-            </div>
+                </div>
+                <div className="RodaPe">
+                    <h1>ddddddddddddd</h1>
+                </div>
         </div>
 
     )
