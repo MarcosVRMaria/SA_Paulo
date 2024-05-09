@@ -4,7 +4,7 @@ import Search from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 
 const StyleButton = styled(Button)({
-  paddingRight:"13px"
+  paddingRight:"10px"
 
 })
 

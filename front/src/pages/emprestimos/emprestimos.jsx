@@ -8,6 +8,7 @@ import moment from "moment";
 import ModalCadastro from "../../component/modalCadastroEmprestimo/index.jsx";
 import ModalFinalizar from "../../component/modalDevolucaoEmprestimo/index.jsx";
 import "./emprestimos.css"
+import SearchButton from "../../component/searchbutton/index.jsx";
 
 const Emprestimos = () => {
     const [nome, setNome] = useState("")
@@ -390,48 +391,64 @@ const Emprestimos = () => {
         getAllData()
     }
     return (
-        <div>
-            {matriculasEmprestimos.length > 0 && (
-                <Dropdown
-                    placeholder={"Matricula"}
-                    selectedOption={matriculaSelect}
-                    setSelectOption={setMatriculaSelect}
-                    options={matriculasEmprestimos}
-                />)
-            }
-            {nomeDropdown.length > 0 && (
-                <Dropdown
-                    placeholder={"Funcionário"}
-                    selectedOption={nomeSelect}
-                    setSelectOption={setNomeSelect}
-                    options={nomeDropdown}
-                />)
-            }
-            {epiFinalizar.length > 0 && (
-                <Dropdown
-                    placeholder={"EPI"}
-                    selectedOption={epiSelect}
-                    setSelectOption={setEpiSelect}
-                    options={epiFinalizar}
-                />)
-            }
+        <div className="content-emprestimo">
+            <div className="left-emprestimo">
+                {matriculasEmprestimos.length > 0 && (
+                    <Dropdown
+                        placeholder={"Matricula"}
+                        selectedOption={matriculaSelect}
+                        setSelectOption={setMatriculaSelect}
+                        options={matriculasEmprestimos}
+                    />)
+                }
+                {nomeDropdown.length > 0 && (
+                    <Dropdown
+                        placeholder={"Funcionário"}
+                        selectedOption={nomeSelect}
+                        setSelectOption={setNomeSelect}
+                        options={nomeDropdown}
+                    />)
+                }
+                {epiFinalizar.length > 0 && (
+                    <Dropdown
+                        placeholder={"EPI"}
+                        selectedOption={epiSelect}
+                        setSelectOption={setEpiSelect}
+                        options={epiFinalizar}
+                    />)
+                }
 
-            <InputTextDefault
-                info={{
-                    id: "dataRetirada",
-                    placeholder: "Data de Retirada",
-                    func: setDatar,
-                    value: datar
-                }}
-            />
-            <InputTextDefault
-                info={{
-                    id: "dataDevolucao",
-                    placeholder: "Data de devolução",
-                    func: setDatad,
-                    value: datad
-                }}
-            />
+                <InputTextDefault
+                    info={{
+                        id: "dataRetirada",
+                        placeholder: "Data de Retirada",
+                        func: setDatar,
+                        value: datar
+                    }}
+                />
+                <InputTextDefault
+                    info={{
+                        id: "dataDevolucao",
+                        placeholder: "Data de devolução",
+                        func: setDatad,
+                        value: datad
+                    }}
+                />
+
+                <div style={{
+                    position: "fixed",
+                    top: "25%",
+                    left: "10%",
+                }} >
+                    {filter.length == 0 &&
+                        <Table columns={columns} data={data} />
+                    }
+                    {filter.length > 0 &&
+                        <Table columns={columns} data={filter} />}
+                </div>
+                <SearchButton onClick={handleClickGet} />
+            </div>
+            <div className="right-emprestimo">
             <ModalCadastro
                 info={{
                     metodo: "Cadastrar",
@@ -480,21 +497,12 @@ const Emprestimos = () => {
                     ok: handleClickDelete
                 }}
             />
-            <div style={{
-                position: "fixed",
-                top: "25%",
-                left: "10%",
-            }} >
-                {filter.length == 0 &&
-                    <Table columns={columns} data={data} />
-                }
-                {filter.length > 0 &&
-                    <Table columns={columns} data={filter} />}
+            
+              
+                <Link to={"/home"}>
+                    <button className="bnt-voltar">Voltar</button>
+                </Link>
             </div>
-            <button onClick={handleClickGet}>Pesquisa</button>
-            <Link to={"/home"}>
-                <button>Voltar</button>
-            </Link>
             <div className="RodaPe">
                 <h1>fffffffffffffffffffffffffff</h1>
             </div>
