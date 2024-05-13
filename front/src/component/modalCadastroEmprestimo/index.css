@@ -1,0 +1,20 @@
+.modal-content{
+    padding-top: 10px;
+}
+.modal-title{
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.fade.modal.show{
+    background-color: rgb(233, 247, 248);
+    border: none;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    left: 30%;
+    right: 30%;
+    bottom: 40%;
+    margin-top: 100px;
+}
+
