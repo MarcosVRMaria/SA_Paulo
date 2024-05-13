@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from '../dropdown';
 import InputTextDefault from '../inputTextDefault';
+import "./index.css"
 
 function ModalCadastro({ info }) {
     const [show, setShow] = useState(false);
@@ -26,12 +27,13 @@ function ModalCadastro({ info }) {
                     <Modal.Title>{info.titulo}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
+                <div className='body-cadastro'>
                     <Dropdown
                         placeholder="EPI"
                         selectedOption={info.epiSelect}
                         setSelectOption={info.setEpiSelect}
                         options={info.epi}
+                        
                     />
                     <Dropdown
                         placeholder="Nome do funcionário"
@@ -61,6 +63,7 @@ function ModalCadastro({ info }) {
                             value: info.valueDatad
                         }}
                     />
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

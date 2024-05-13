@@ -344,9 +344,13 @@ const EmployeeManagement = () => {
           }} />
         <BigButton text={"Remover"} onClick={handleClickDelete} />
         <Link to={"/home"}>
-          <button>Voltar</button>
+          <button className="bnt-voltar">Voltar</button>
         </Link>
       </div>
+      <div className="RodaPe">
+                <h1>SENAI - São José</h1>
+                <h3>Produto feito em conjunto com a turma do Senai São José, para situação de aprendizagem 2024/1</h3>
+            </div>
     </div>
   )
 };
