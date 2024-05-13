@@ -8,6 +8,7 @@ import ModalEditar from "../../component/modalEditarEpi/index.jsx";
 import Dropdown from "../../component/dropdown/index.jsx";
 import moment from "moment";
 import "./epi.css"
+import SearchButton from "../../component/searchbutton/index.jsx";
 
 
 const Epi = () => {
@@ -299,6 +300,7 @@ const Epi = () => {
                         value: datav
                     }}
                 />
+                  <SearchButton onClick={handleClickGet} />
                   <div style={{
                     position: "fixed",
                     top: "25%",
@@ -385,7 +387,7 @@ const Epi = () => {
                     }}
                 />
               
-                <button className="bnt-pesquisar-epi" onClick={handleClickGet}>Pesquisa</button>
+               
                 
                 <button className="bnt-apagar-epi" onClick={handleClickDelete}>Apagar</button>
                 <Link to={"/home"}>

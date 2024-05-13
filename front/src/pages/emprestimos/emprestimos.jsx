@@ -387,7 +387,7 @@ const Emprestimos = () => {
             .catch((error) => {
                 console.log(error);
             });
-        alert("Edição realizada com sucesso")
+        alert("Empréstimo finalizado com sucesso")
         getAllData()
     }
     return (

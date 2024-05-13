@@ -55,10 +55,13 @@ const Home = () => {
             funcionaio: element.nomeFuncionario,
             epi: element.epi,
             vencimento: date,
+            delete: element.delete
           };
         });
-        setData(objectsData);
-        console.log(objectsData);
+        console.log(objectsData)
+        let filtro = objectsData.filter((x) => x.delete == null)
+        setData(filtro)
+        console.log(filtro);
       })
       .catch((error) => {
         console.log(error);
@@ -80,28 +83,28 @@ const Home = () => {
         <Table columns={columns} data={data} select={false} />
       </div>
       <div>
-        
+
         <div className="content-bnt-home">
-          
-        <div className="bnt-epi">
-        <Card name={"Gerenciar EPI"} route={"/epi"} />
-        </div>
-        <div className="bnt-funcionario">
-        <Card name={"Gerenciar funcionário"} route={"/funcionarios"} />
-        </div>
-        <div className="bnt-emprestimo">
-        <Card name={"Gerenciar empréstimo"} route={"/emprestimos"} />
-        </div>
-        <div className="bnt-historico">
-        <Card name={"Histórico"} route={"/historico"} />
-        </div>
+
+          <div className="bnt-epi">
+            <Card name={"Gerenciar EPI"} route={"/epi"} />
+          </div>
+          <div className="bnt-funcionario">
+            <Card name={"Gerenciar funcionário"} route={"/funcionarios"} />
+          </div>
+          <div className="bnt-emprestimo">
+            <Card name={"Gerenciar empréstimo"} route={"/emprestimos"} />
+          </div>
+          <div className="bnt-historico">
+            <Card name={"Histórico"} route={"/historico"} />
+          </div>
         </div>
       </div>
       <div className="RodaPe">
-                <h1>SENAI - São José</h1>
-                <h3>Produto feito em conjunto com a turma do Senai São José, para situação de aprendizagem 2024/1</h3>
-            </div>
+        <h1>SENAI - São José</h1>
+        <h3>Produto feito em conjunto com a turma do Senai São José, para situação de aprendizagem 2024/1</h3>
       </div>
+    </div>
   );
 };
 
